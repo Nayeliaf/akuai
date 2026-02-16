@@ -477,64 +477,79 @@ header.scrolled {
         <button onclick="mostrarFormulario()" class="btn-main" style="padding: 18px 40px;">Abrir Formulario de Registro</button>
     </div>
 
-    <div id="form-wrapper">
-        <div class="form-container">
-            <h3 style="font-family:'Playfair Display'; font-size: 26px; margin-top: 0; color: var(--orange-2);">Registro de Interés</h3>
-            <form id="akuaiForm" action="https://formsubmit.co/npaf31@gmail.com" method="POST">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="http://127.0.0.1:5500/index.html">
+<div id="form-wrapper">
+    <div class="form-container">
+        <h3 style="font-family:'Playfair Display'; font-size: 26px; margin-top: 0; color: var(--orange-2);">Registro de Interés</h3>
+        <form id="akuaiForm" action="https://formsubmit.co/npaf31@gmail.com" method="POST">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="http://127.0.0.1:5500/index.html">
 
-                <div class="section-title-form">1. Datos Personales</div>
-                <div class="question-box"><label>Nombre completo *</label><input type="text" name="nombre" id="f-nombre" class="input-field" required placeholder="Tu nombre"></div>
-                <div class="question-box"><label>Correo electrónico *</label><input type="email" name="email" id="f-email" class="input-field" required placeholder="correo@ejemplo.com"></div>
-                <div class="question-box"><label>WhatsApp *</label><input type="tel" name="whatsapp" class="input-field" required placeholder="+58 4xx-xxxxxxx"></div>
-                <div class="question-box"><label>Ciudad / Estado *</label><input type="text" name="ubicacion" class="input-field" required placeholder="Mérida, Venezuela"></div>
+            <div class="section-title-form">1. Datos Personales</div>
+            <div class="question-box">
+                <label>Nombre completo <span style="color:var(--orange); font-weight:bold;">*</span></label>
+                <input type="text" name="nombre" id="f-nombre" class="input-field" required placeholder="Tu nombre">
+            </div>
+            <div class="question-box">
+                <label>Correo electrónico <span style="color:var(--orange); font-weight:bold;">*</span></label>
+                <input type="email" name="email" id="f-email" class="input-field" required placeholder="correo@ejemplo.com">
+            </div>
+            <div class="question-box">
+                <label>WhatsApp <span style="color:var(--orange); font-weight:bold;">*</span></label>
+                <input type="tel" name="whatsapp" class="input-field" required placeholder="+58 4xx-xxxxxxx">
+            </div>
+            <div class="question-box">
+                <label>Ciudad / Estado <span style="color:var(--orange); font-weight:bold;">*</span></label>
+                <input type="text" name="ubicacion" class="input-field" required placeholder="Mérida, Venezuela">
+            </div>
 
-                <div class="section-title-form">2. Perfil Profesional</div>
-                <div class="question-box">
-                    <label>Edad</label>
-                    <div class="grid-options">
-                        <label class="option-item"><input type="radio" name="edad" value="18-24"> 18 – 24 años</label>
-                        <label class="option-item"><input type="radio" name="edad" value="25-34"> 25 – 34 años</label>
-                        <label class="option-item"><input type="radio" name="edad" value="35-44"> 35 – 44 años</label>
-                        <label class="option-item"><input type="radio" name="edad" value="45-54"> 45 – 54 años</label>
-                        <label class="option-item"><input type="radio" name="edad" value="55+"> 55+ años</label>
-                    </div>
+            <div class="section-title-form">2. Perfil Profesional</div>
+            <div class="question-box">
+                <label>Edad <span style="color:var(--orange); font-weight:bold;">*</span></label>
+                <div class="grid-options">
+                    <label class="option-item"><input type="radio" name="edad" value="18-24" required> 18 – 24 años</label>
+                    <label class="option-item"><input type="radio" name="edad" value="25-34"> 25 – 34 años</label>
+                    <label class="option-item"><input type="radio" name="edad" value="35-44"> 35 – 44 años</label>
+                    <label class="option-item"><input type="radio" name="edad" value="45-54"> 45 – 54 años</label>
+                    <label class="option-item"><input type="radio" name="edad" value="55+"> 55+ años</label>
                 </div>
-                <div class="question-box">
-                    <label>Área de interés o desempeño</label>
-                    <div class="grid-options">
-                        <label class="option-item"><input type="checkbox" name="interes[]" value="Turismo"> Turismo</label>
-                        <label class="option-item"><input type="checkbox" name="interes[]" value="Hoteleria"> Hotelería</label>
-                        <label class="option-item"><input type="checkbox" name="interes[]" value="Marketing"> Marketing</label>
-                        <label class="option-item"><input type="checkbox" name="interes[]" value="Eventos"> Eventos</label>
-                        <label class="option-item"><input type="checkbox" name="interes[]" value="Emprendimiento"> Emprendimiento</label>
-                    </div>
+            </div>
+            <div class="question-box">
+                <label>Área de interés o desempeño</label>
+                <div class="grid-options">
+                    <label class="option-item"><input type="checkbox" name="interes[]" value="Turismo"> Turismo</label>
+                    <label class="option-item"><input type="checkbox" name="interes[]" value="Hoteleria"> Hotelería</label>
+                    <label class="option-item"><input type="checkbox" name="interes[]" value="Marketing"> Marketing</label>
+                    <label class="option-item"><input type="checkbox" name="interes[]" value="Eventos"> Eventos</label>
+                    <label class="option-item"><input type="checkbox" name="interes[]" value="Emprendimiento"> Emprendimiento</label>
                 </div>
+            </div>
 
-                <div class="section-title-form">3. Intereses en Eventos</div>
-                <div class="question-box">
-                    <label>¿Qué tipo de eventos le interesan?</label>
-                    <div class="grid-options">
-                        <label class="option-item"><input type="checkbox" name="tipo_evento[]" value="Talleres"> Talleres formativos</label>
-                        <label class="option-item"><input type="checkbox" name="tipo_evento[]" value="Networking"> Networking</label>
-                        <label class="option-item"><input type="checkbox" name="tipo_evento[]" value="Liderazgo"> Liderazgo</label>
-                    </div>
+            <div class="section-title-form">3. Intereses en Eventos</div>
+            <div class="question-box">
+                <label>¿Qué tipo de eventos le interesan?</label>
+                <div class="grid-options">
+                    <label class="option-item"><input type="checkbox" name="tipo_evento[]" value="Talleres"> Talleres formativos</label>
+                    <label class="option-item"><input type="checkbox" name="tipo_evento[]" value="Networking"> Networking</label>
+                    <label class="option-item"><input type="checkbox" name="tipo_evento[]" value="Liderazgo"> Liderazgo</label>
                 </div>
-                <div class="question-box"><label>¿Qué temas le gustaría ver en futuros eventos?</label><textarea name="sugerencias" class="input-area" rows="3" placeholder="Sugerencias..."></textarea></div>
+            </div>
+            <div class="question-box">
+                <label>¿Qué temas le gustaría ver en futuros eventos?</label>
+                <textarea name="sugerencias" class="input-area" rows="3" placeholder="Sugerencias..."></textarea>
+            </div>
 
-                <div class="section-title-form">4. Autorización</div>
-                <div class="question-box">
-                    <label>Autorizo el uso de mis datos para fines informativos *</label>
-                    <label class="option-item"><input type="radio" name="autorizacion" value="Si" required> Sí autorizo</label>
-                    <label class="option-item"><input type="radio" name="autorizacion" value="No" required> No autorizo</label>
-                </div>
+            <div class="section-title-form">4. Autorización</div>
+            <div class="question-box">
+                <label>Autorizo el uso de mis datos para fines informativos <span style="color:var(--orange); font-weight:bold;">*</span></label>
+                <label class="option-item"><input type="radio" name="autorizacion" value="Si" required> Sí autorizo</label>
+                <label class="option-item"><input type="radio" name="autorizacion" value="No" required> No autorizo</label>
+            </div>
 
-                <button type="submit" class="btn-main" style="width: 100%; border-radius: 12px; padding: 18px;">Enviar Registro</button>
-            </form>
-            <button onclick="cerrarFormulario()" style="background:none; border:none; color:var(--muted); margin-top:20px; cursor:pointer; font-size:13px; width:100%;">✕ Cancelar y cerrar</button>
-        </div>
+            <button type="submit" class="btn-main" style="width: 100%; border-radius: 12px; padding: 18px;">Enviar Registro</button>
+        </form>
+        <button onclick="cerrarFormulario()" style="background:none; border:none; color:var(--muted); margin-top:20px; cursor:pointer; font-size:13px; width:100%;">✕ Cancelar y cerrar</button>
     </div>
+</div>
   </section>
 
   <section id="contacto" class="reveal" style="text-align: center; padding-bottom: 100px;">
