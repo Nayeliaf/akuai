@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akuai Eventos | Elevando Sueños</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ==============================
+    🔧 AJUSTES DE MARCA
+============================== */
+:root {
+  --orange: #E07A1F;
+  --orange-2: #C76412;
+  --cream: #F6EFE7;
+  --ink: #1A1A1A;
+  --muted: #666;
+  --card: #ffffff;
+  --stroke: rgba(0,0,0,.08);
+  --shadow: 0 18px 50px rgba(0,0,0,.10);
+  --radius: 18px;
+  --logo-size: 52px;
+  --logo-scale: 0.72;
+  --banner-height: 400px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: var(--ink);
+  background: 
+    radial-gradient(1200px 600px at 20% 0%, rgba(224,122,31,.18), transparent 60%),
+    linear-gradient(180deg, #fff, var(--cream));
+}
+
+a { text-decoration: none; color: inherit; }
+.wrap { max-width: 1100px; margin: auto; padding: 0 20px; }
+
+/* HEADER */
+header {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: saturate(140%) blur(10px);
+  background: rgba(246,239,231,.85);
+  border-bottom: 1px solid var(--stroke);
+}
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.logo {
+  width: var(--logo-size); height: var(--logo-size); border-radius: 14px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-2));
+  display: grid; place-items: center;
+  box-shadow: 0 10px 25px rgba(224,122,31,.25);
+}
+.logo img { width: calc(var(--logo-size) * var(--logo-scale)); height: calc(var(--logo-size) * var(--logo-scale)); object-fit: contain; }
+.brand strong { font-size: 15px; display: block; }
+.brand span { font-size: 12px; color: var(--muted); }
+
+nav { display: flex; gap: 8px; }
+nav a { font-size: 13px; padding: 8px 12px; border-radius: 8px; transition: .3s; font-weight: 500; white-space: nowrap; }
+nav a:hover { background: rgba(224,122,31,0.1); color: var(--orange-2); }
+
+section { padding: 80px 0; }
+h2.section-title { font-family: 'Playfair Display', serif; font-size: 36px; margin-bottom: 30px; text-align: center; }
+
+/* HERO */
+.hero { padding: 80px 0 60px; }
+.hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; }
+.hero-card { background: rgba(255,255,255,.8); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,0.5); }
+.badge { display: inline-block; padding: 6px 14px; border-radius: 999px; background: rgba(224,122,31,.12); color: var(--orange-2); font-size: 11px; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; }
+h1 { font-family: 'Playfair Display', serif; font-size: 44px; margin: 0 0 15px 0; line-height: 1.1; }
+.lead { font-size: 18px; color: #444; margin-bottom: 25px; font-weight: 300; }
+
+.btn-main {
+    display: inline-block; background: var(--orange); color: white; padding: 14px 28px;
+    border-radius: 10px; font-weight: 700; transition: .3s; border: none; cursor: pointer; text-align: center;
+}
+.btn-main:hover { background: var(--orange-2); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(224,122,31,0.2); }
+
+.stat-card {
+  background: linear-gradient(135deg, var(--orange), var(--orange-2)); color: #fff;
+  padding: 40px; border-radius: var(--radius); display: flex; flex-direction: column; justify-content: center; box-shadow: 0 20px 40px rgba(224,122,31,0.3);
+}
+.stat-card h3 { font-family: 'Playfair Display', serif; font-size: 24px; margin: 0 0 15px 0; }
+.stat-card p { font-size: 15px; line-height: 1.6; margin: 0; opacity: 0.95; font-weight: 400; }
+
+/* CONÓCENOS */
+.about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+.about-card { background: white; padding: 30px; border-radius: var(--radius); border-bottom: 4px solid var(--orange); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+.about-card h4 { color: var(--orange-2); font-family: 'Playfair Display', serif; font-size: 22px; margin: 0 0 15px 0; }
+.about-card p { line-height: 1.6; color: #555; font-size: 15px; }
+
+/* CALENDARIO LIMPIO */
+.calendar-container {
+    max-width: 800px; margin: auto; background: white; padding: 30px; 
+    border-radius: 24px; box-shadow: var(--shadow); border: 1px solid var(--stroke);
+}
+.calendar-header {
+    display: grid; grid-template-columns: repeat(7, 1fr); text-align: center;
+    font-weight: 700; color: var(--orange-2); padding-bottom: 20px; font-size: 13px; text-transform: uppercase;
+    border-bottom: 1px solid #eee; margin-bottom: 20px;
+}
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+.day {
+    aspect-ratio: 1/1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border-radius: 12px; font-size: 16px; color: #444; transition: .3s; position: relative;
+}
+.day.has-event {
+    background: rgba(224,122,31,0.05); color: var(--orange-2); font-weight: 700;
+    cursor: pointer; border: 1.5px dashed var(--orange);
+}
+.day.has-event:hover { background: var(--orange); color: white; border-style: solid; }
+.event-dot { font-size: 12px; margin-top: 2px; }
+.day.empty { opacity: 0; }
+
+/* --- ESTILOS DE GALERÍA (NUEVOS) --- */
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.gallery-item { position: relative; border-radius: 20px; overflow: hidden; height: 380px; box-shadow: var(--shadow); cursor: pointer; border: 1px solid var(--stroke); }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+.gallery-overlay { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: linear-gradient(to top, rgba(224, 122, 31, 0.92), rgba(199, 100, 18, 0.4), transparent 80%); 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-end; 
+    padding: 25px; 
+    color: white;
+}
+.gallery-overlay h3 { font-family: 'Playfair Display', serif; margin: 0 0 10px 0; font-size: 22px; }
+.gallery-item:hover img { transform: scale(1.08); }
+
+/* Detalle de Galería con Ediciones */
+.edition-selector { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
+.btn-edition { 
+    padding: 8px 18px; border-radius: 99px; border: 1px solid var(--orange); 
+    background: transparent; color: var(--orange-2); font-weight: 600; font-size: 13px; cursor: pointer; transition: .3s;
+}
+.btn-edition.active { background: var(--orange); color: white; }
+
+.detail-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; text-align: left; }
+.speaker-strip { display: flex; gap: 20px; margin: 20px 0; overflow-x: auto; padding-bottom: 15px; }
+.speaker-mini { flex: 0 0 110px; text-align: center; font-size: 12px; }
+.speaker-mini img { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; border: 2px solid var(--orange); margin-bottom: 8px; background: #eee; }
+.photo-carousel { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px; scroll-snap-type: x mandatory; }
+.photo-carousel img { height: 260px; border-radius: 15px; scroll-snap-align: start; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+/* --- ESTILO CARRUSEL 1:1 A COLOR --- */
+.slider {
+    width: 100%; height: 180px; margin: auto; overflow: hidden; position: relative; display: flex; align-items: center;
+}
+.slider .slide-track {
+    display: flex; width: calc(180px * 14); animation: scroll 30s linear infinite;
+}
+.slider .slide-track:hover { animation-play-state: paused; }
+.slider .slide {
+    width: 180px; display: flex; align-items: center; justify-content: center; padding: 10px;
+}
+.slider img {
+    width: 130px; height: 130px; object-fit: contain; opacity: 1; transition: .4s;
+}
+.slider img:hover { transform: scale(1.1); }
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-180px * 7)); } 
+}
+
+/* FORMULARIO */
+.cta-registry { text-align: center; background: white; border-radius: 30px; border: 1px solid var(--stroke); }
+#form-wrapper { display: none; margin-top: 40px; animation: fadeIn 0.5s ease; }
+.form-container { max-width: 800px; margin: auto; text-align: left; background: #fdfaf8; padding: 40px; border-radius: 24px; border: 1px solid var(--orange); }
+.section-title-form { margin: 30px 0 15px; padding-bottom: 8px; border-bottom: 2px solid var(--orange); color: var(--orange-2); font-weight: 700; text-transform: uppercase; font-size: 13px; }
+.question-box { margin-bottom: 20px; }
+.question-box label { display: block; font-weight: 600; margin-bottom: 8px; }
+.input-field, .input-area { width: 100%; padding: 10px 0; border: none; border-bottom: 1.5px solid #ddd; font-size: 16px; outline: none; background: transparent; font-family: inherit; }
+.input-field:focus, .input-area:focus { border-bottom-color: var(--orange); }
+.grid-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.option-item { display: flex; align-items: center; gap: 10px; font-size: 14px; padding: 8px; cursor: pointer; }
+
+/* MODALES */
+.modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 9999; place-items: center;
+}
+.custom-modal {
+    background: white; padding: 35px; border-radius: var(--radius); max-width: 450px; width: 90%; text-align: center;
+    box-shadow: 0 25px 70px rgba(0,0,0,0.3); border-top: 6px solid var(--orange);
+}
+.modal-buttons { display: flex; gap: 12px; margin-top: 25px; }
+.btn-confirm { background: var(--orange); color: white; flex: 1; padding: 14px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; transition: .3s; }
+.btn-cancel { background: #f0f0f0; color: #555; flex: 1; padding: 14px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; }
+.success-icon { width: 60px; height: 60px; background: #4BB543; color: white; border-radius: 50%; display: grid; place-items: center; margin: 0 auto 20px; font-size: 30px; font-weight: bold; }
+
+.footer-banner { width: 100%; height: var(--banner-height); overflow: hidden; margin-top: 60px; }
+.footer-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+footer { text-align: center; padding: 40px 0; background: #fff; color: var(--muted); font-size: 14px; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@media(max-width:920px){ 
+    .topbar { flex-direction: column; gap: 15px; }
+    nav { overflow-x: auto; width: 100%; justify-content: center; padding-bottom: 5px; }
+    .hero-grid { grid-template-columns: 1fr; } 
+    h1 { font-size: 34px; } 
+    .footer-banner { height: 250px; } 
+    .detail-layout { grid-template-columns: 1fr; gap: 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="modal-confirm" class="modal-overlay"><div class="custom-modal"><h3 style="font-family:'Playfair Display'; font-size: 24px; margin-top:0;">Verifica tus datos</h3><p style="color:var(--muted); font-size:15px; margin-bottom: 20px;">Confirma que tu información es correcta:</p><div style="text-align: left; background: #fdfaf8; padding: 15px; border-radius: 12px; border: 1px solid rgba(224,122,31,0.1); margin-bottom: 20px;"><p style="margin: 5px 0;"><strong>Nombre:</strong> <span id="confirm-name"></span></p><p style="margin: 5px 0;"><strong>Email:</strong> <span id="confirm-email"></span></p></div><div class="modal-buttons"><button class="btn-cancel" onclick="cerrarConfirm()">Editar</button><button class="btn-confirm" onclick="mostrarExito()">Sí, enviar</button></div></div></div>
+<div id="modal-success" class="modal-overlay"><div class="custom-modal"><div class="success-icon">✓</div><h3 style="font-family:'Playfair Display'; font-size: 24px; margin-top:0;">¡Registro Exitoso!</h3><p style="color:var(--muted); font-size:15px;">Gracias por registrarte. Te estamos redirigiendo.</p><button class="btn-confirm" style="width:100%; margin-top:15px;" onclick="enviarFinal()">Finalizar</button></div></div>
+<div id="modal-event" class="modal-overlay">
+    <div class="custom-modal" style="max-width: 650px; text-align: left; max-height: 90vh; overflow-y: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <span class="badge">Evento Especial</span>
+            <button onclick="cerrarEvent()" style="background:none; border:none; font-size:24px; cursor:pointer; color:var(--muted);">&times;</button>
+        </div>
+        
+        <h2 id="ev-title" style="font-family:'Playfair Display'; margin: 10px 0 5px; color: var(--orange-2); font-size: 28px;"></h2>
+        <p id="ev-desc" style="line-height: 1.5; color: #666; margin-bottom: 20px; font-size: 15px;"></p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; background: #fdfaf8; padding: 15px; border-radius: 12px; border: 1px solid rgba(224,122,31,0.1); margin-bottom: 20px;">
+            <div><strong>🕒 Horario:</strong> <span id="ev-time"></span></div>
+            <div><strong>📍 Lugar:</strong> <span id="ev-place"></span></div>
+            <div><strong>🎟️ Inversión:</strong> <span id="ev-cost"></span></div>
+            <div><strong>📅 Fecha:</strong> <span id="ev-date-display"></span></div>
+        </div>
+
+        <div id="speakers-section" style="margin-bottom: 20px;">
+            <h4 style="border-bottom: 2px solid var(--orange); padding-bottom: 5px; margin-bottom: 10px; font-size: 14px; text-transform: uppercase; color: var(--orange-2);">Panel de Ponentes</h4>
+            <div id="speakers-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px 15px; font-size: 13px; color: #444;">
+                </div>
+        </div>
+
+        <div id="special-guests-section" style="margin-bottom: 25px;">
+            <h4 style="border-bottom: 2px solid #ddd; padding-bottom: 5px; margin-bottom: 10px; font-size: 14px; text-transform: uppercase; color: var(--muted);">Invitados Especiales</h4>
+            <p id="ev-guest" style="font-size: 13px; color: #555; font-style: italic;"></p>
+        </div>
+
+        <div class="modal-buttons">
+            <button class="btn-confirm" onclick="irAWhatsApp()" style="width: 100%;">Quiero Asistir</button>
+        </div>
+    </div>
+</div>
+<header>
+  <div class="wrap topbar">
+    <div class="brand">
+      <div class="logo"><img src="isotipopng.png" alt="Akuai"></div>
+      <div><strong>Akuai Eventos</strong><span>@akuai_eventos · Mérida</span></div>
+    </div>
+    <nav>
+      <a href="#conocenos">Conócenos</a>
+      <a href="#eventos">Próximos Eventos</a>
+      <a href="#galeria">Galería</a>
+      <a href="#aliados">Aliados</a>
+      <a href="#unete">Únete</a>
+      <a href="#contacto">Contáctanos</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-card">
+        <div class="badge">Hotel Escuela de los Andes Venezolanos · Gestión Turística</div>
+        <h1>Elevando sueños y transformando realidades.</h1>
+        <p class="lead">Excelencia y Calidad en cada detalle.</p>
+        <button onclick="mostrarFormulario()" class="btn-main">Participa en nuestros eventos</button>
+      </div>
+      <div class="stat-card">
+        <h3>Sobre Nosotros</h3>
+        <p>Somos una agencia dedicada a la creación de espacios que inspiran. A través de la gestión turística y la organización de eventos de alto nivel.</p>
+        <a href="https://instagram.com/akuai_eventos" target="_blank" class="btn-main" style="background: rgba(255,255,255,0.2); margin-top: 20px; border: 1px solid rgba(255,255,255,0.4);">Ver Trayectoria</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="conocenos">
+    <h2 class="section-title">Conócenos</h2>
+    <div style="max-width: 800px; margin: auto; text-align: center; margin-bottom: 50px;">
+        <p style="font-size: 18px; line-height: 1.8; color: #444;">
+            En <strong>Akuai Eventos</strong>, creemos que cada encuentro es una oportunidad para impactar vidas. Nacemos de la pasión por la gestión turística y el compromiso con la excelencia en el estado Mérida.
+        </p>
+    </div>
+    <div class="about-grid">
+        <div class="about-card">
+            <h4>Nuestra Misión</h4>
+            <p>Diseñar y ejecutar eventos de alto nivel que promuevan la formación profesional, el networking y el desarrollo turístico regional.</p>
+        </div>
+        <div class="about-card">
+            <h4>Nuestra Visión</h4>
+            <p>Ser la agencia referente en experiencias memorables en la región andina, reconocida por nuestra innovación y elegancia.</p>
+        </div>
+        <div class="about-card">
+            <h4>Valores</h4>
+            <p>Hospitalidad, responsabilidad social y profesionalismo son los pilares que guían cada uno de nuestros proyectos.</p>
+        </div>
+    </div>
+  </section>
+
+  <section id="eventos">
+    <h2 class="section-title">Próximos Eventos</h2>
+    <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 30px;">
+        <button onclick="cambiarMes(-1)" style="background:none; border:none; color:var(--orange); cursor:pointer; font-size:20px; font-weight:bold;">❮</button>
+        <p style="color: var(--orange); font-weight: bold; text-transform: uppercase; letter-spacing: 2px; margin:0;" id="month-name"></p>
+        <button onclick="cambiarMes(1)" style="background:none; border:none; color:var(--orange); cursor:pointer; font-size:20px; font-weight:bold;">❯</button>
+    </div>
+    <div class="calendar-container">
+        <div class="calendar-header"><div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div></div>
+        <div id="calendar-days" class="calendar-grid"></div>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <h2 class="section-title">Galería</h2>
+    
+    <div id="gallery-categories" class="gallery-grid">
+      <div class="gallery-item" onclick="verDetalleGaleria('mujer')">
+        <img src="foto-turismo-mujer.jpg" alt="Turismo con Rostro de Mujer">
+        <div class="gallery-overlay">
+          <h3>Turismo con Rostro de Mujer</h3>
+          <p style="font-size: 12px; opacity: 0.9;">Explorar ediciones anteriores</p>
+        </div>
+      </div>
+      <div class="gallery-item" onclick="verDetalleGaleria('arepazo')">
+        <img src="foto-arepazo.jpg" alt="Arepazo">
+        <div class="gallery-overlay">
+          <h3>El Arepazo</h3>
+          <p style="font-size: 12px; opacity: 0.9;">Memorias gastronómicas</p>
+        </div>
+      </div>
+      <div class="gallery-item" onclick="verDetalleGaleria('lideres')">
+        <img src="foto-lideres.jpg" alt="Líderes">
+        <div class="gallery-overlay">
+          <h3>Líderes de Alto Impacto</h3>
+          <p style="font-size: 12px; opacity: 0.9;">Formación y excelencia</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="gallery-detail" style="display: none; animation: fadeIn 0.5s ease; background: white; padding: 40px; border-radius: 24px; box-shadow: var(--shadow); border: 1px solid var(--stroke);">
+      <button onclick="volverAGaleria()" style="background:none; border:none; color:var(--orange); cursor:pointer; font-weight:bold; margin-bottom:25px; display:flex; align-items:center; gap:8px; font-size: 14px;">❮ VOLVER A LA GALERÍA</button>
+      
+      <div id="edition-tabs" class="edition-selector"></div>
+      
+      <div id="detail-content"></div>
+    </div>
+  </section>
+
+  <section id="aliados" style="padding: 60px 0;">
+    <h2 class="section-title">Nuestros Aliados</h2>
+    <div class="slider">
+        <div class="slide-track">
+            <div class="slide"><img src="suraki.png" alt="Aliado 1"></div>
+            <div class="slide"><img src="logo2.png" alt="Aliado 2"></div>
+            <div class="slide"><img src="logo3.png" alt="Aliado 3"></div>
+            <div class="slide"><img src="logo4.png" alt="Aliado 4"></div>
+            <div class="slide"><img src="logo5.png" alt="Aliado 5"></div>
+            <div class="slide"><img src="logo6.png" alt="Aliado 6"></div>
+            <div class="slide"><img src="logo7.png" alt="Aliado 7"></div>
+            <div class="slide"><img src="suraki.png" alt="Aliado 1"></div>
+            <div class="slide"><img src="logo2.png" alt="Aliado 2"></div>
+            <div class="slide"><img src="logo3.png" alt="Aliado 3"></div>
+            <div class="slide"><img src="logo4.png" alt="Aliado 4"></div>
+            <div class="slide"><img src="logo5.png" alt="Aliado 5"></div>
+            <div class="slide"><img src="logo6.png" alt="Aliado 6"></div>
+            <div class="slide"><img src="logo7.png" alt="Aliado 7"></div>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="https://wa.me/584164715431?text=Hola%20Akuai,%20estoy%20interesado%20en%20patrocinar%20sus%20eventos." target="_blank" style="color: var(--orange-2); font-weight: bold; border-bottom: 2px solid var(--orange); font-size: 14px;">¿Quieres ser patrocinante? Contáctanos aquí</a>
+    </div>
+  </section>
+
+  <section id="unete" class="cta-registry">
+    <h2 class="section-title">Únete</h2>
+    <div id="cta-content" style="padding: 40px 0;">
+        <p style="color: var(--muted); max-width: 600px; margin: 0 auto 30px;">Regístrate para recibir invitaciones exclusivas a congresos, talleres y networking.</p>
+        <button onclick="mostrarFormulario()" class="btn-main" style="padding: 18px 40px;">Abrir Formulario de Registro</button>
+    </div>
+
+    <div id="form-wrapper">
+        <div class="form-container">
+            <h3 style="font-family:'Playfair Display'; font-size: 26px; margin-top: 0; color: var(--orange-2);">Registro de Interés</h3>
+            <form id="akuaiForm" action="https://formsubmit.co/npaf31@gmail.com" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="http://127.0.0.1:5500/index.html">
+
+                <div class="section-title-form">1. Datos Personales</div>
+                <div class="question-box"><label>Nombre completo *</label><input type="text" name="nombre" id="f-nombre" class="input-field" required placeholder="Tu nombre"></div>
+                <div class="question-box"><label>Correo electrónico *</label><input type="email" name="email" id="f-email" class="input-field" required placeholder="correo@ejemplo.com"></div>
+                <div class="question-box"><label>WhatsApp *</label><input type="tel" name="whatsapp" class="input-field" required placeholder="+58 4xx-xxxxxxx"></div>
+                <div class="question-box"><label>Ciudad / Estado *</label><input type="text" name="ubicacion" class="input-field" required placeholder="Mérida, Venezuela"></div>
+
+                <div class="section-title-form">2. Perfil Profesional</div>
+                <div class="question-box">
+                    <label>Edad</label>
+                    <div class="grid-options">
+                        <label class="option-item"><input type="radio" name="edad" value="18-24"> 18 – 24 años</label>
+                        <label class="option-item"><input type="radio" name="edad" value="25-34"> 25 – 34 años</label>
+                        <label class="option-item"><input type="radio" name="edad" value="35-44"> 35 – 44 años</label>
+                        <label class="option-item"><input type="radio" name="edad" value="45-54"> 45 – 54 años</label>
+                        <label class="option-item"><input type="radio" name="edad" value="55+"> 55+ años</label>
+                    </div>
+                </div>
+                <div class="question-box">
+                    <label>Área de interés o desempeño</label>
+                    <div class="grid-options">
+                        <label class="option-item"><input type="checkbox" name="interes[]" value="Turismo"> Turismo</label>
+                        <label class="option-item"><input type="checkbox" name="interes[]" value="Hoteleria"> Hotelería</label>
+                        <label class="option-item"><input type="checkbox" name="interes[]" value="Marketing"> Marketing</label>
+                        <label class="option-item"><input type="checkbox" name="interes[]" value="Eventos"> Eventos</label>
+                        <label class="option-item"><input type="checkbox" name="interes[]" value="Emprendimiento"> Emprendimiento</label>
+                    </div>
+                </div>
+
+                <div class="section-title-form">3. Intereses en Eventos</div>
+                <div class="question-box">
+                    <label>¿Qué tipo de eventos le interesan?</label>
+                    <div class="grid-options">
+                        <label class="option-item"><input type="checkbox" name="tipo_evento[]" value="Talleres"> Talleres formativos</label>
+                        <label class="option-item"><input type="checkbox" name="tipo_evento[]" value="Networking"> Networking</label>
+                        <label class="option-item"><input type="checkbox" name="tipo_evento[]" value="Liderazgo"> Liderazgo</label>
+                    </div>
+                </div>
+                <div class="question-box"><label>¿Qué temas le gustaría ver en futuros eventos?</label><textarea name="sugerencias" class="input-area" rows="3" placeholder="Sugerencias..."></textarea></div>
+
+                <div class="section-title-form">4. Autorización</div>
+                <div class="question-box">
+                    <label>Autorizo el uso de mis datos para fines informativos *</label>
+                    <label class="option-item"><input type="radio" name="autorizacion" value="Si" required> Sí autorizo</label>
+                    <label class="option-item"><input type="radio" name="autorizacion" value="No" required> No autorizo</label>
+                </div>
+
+                <button type="submit" class="btn-main" style="width: 100%; border-radius: 12px; padding: 18px;">Enviar Registro</button>
+            </form>
+            <button onclick="cerrarFormulario()" style="background:none; border:none; color:var(--muted); margin-top:20px; cursor:pointer; font-size:13px; width:100%;">✕ Cancelar y cerrar</button>
+        </div>
+    </div>
+  </section>
+
+  <section id="contacto" style="text-align: center; padding-bottom: 100px;">
+    <h2 class="section-title">Contáctanos</h2>
+    <p style="margin-bottom: 25px;">Síguenos en nuestras plataformas oficiales:</p>
+    <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+        <a href="https://instagram.com/akuai_eventos" target="_blank" class="btn-main">Instagram</a>
+        <a href="https://wa.me/584164715431" target="_blank" class="btn-main" style="background: #25D366;">WhatsApp Directo</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="footer-banner"><img src="banner.png" alt="Akuai Eventos"></section>
+
+<footer>
+  <div class="wrap">
+    <p>© <span id="year"></span> Akuai Eventos · Mérida, Venezuela</p>
+    <small>Excelencia y calidad en cada detalle</small>
+  </div>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+const form = document.getElementById("akuaiForm");
+const modalConfirm = document.getElementById("modal-confirm");
+const modalSuccess = document.getElementById("modal-success");
+
+function mostrarFormulario() { document.getElementById("form-wrapper").style.display = "block"; document.getElementById("cta-content").style.display = "none"; document.getElementById("unete").scrollIntoView({ behavior: 'smooth' }); }
+function cerrarFormulario() { document.getElementById("form-wrapper").style.display = "none"; document.getElementById("cta-content").style.display = "block"; }
+form.onsubmit = function(e) { e.preventDefault(); document.getElementById("confirm-name").textContent = document.getElementById("f-nombre").value; document.getElementById("confirm-email").textContent = document.getElementById("f-email").value; modalConfirm.style.display = "grid"; };
+function cerrarConfirm() { modalConfirm.style.display = "none"; }
+function mostrarExito() { modalConfirm.style.display = "none"; modalSuccess.style.display = "grid"; }
+function enviarFinal() { modalSuccess.style.display = "none"; form.submit(); }
+
+// --- DATA DE GALERÍA CON EDICIONES ---
+const galeriaData = {
+    "mujer": {
+        nombreEvento: "Turismo con Rostro de Mujer",
+        ediciones: [
+            {
+                nombre: "1era Edición",
+                concepto: "Lanzamiento oficial del movimiento de liderazgo femenino en el Hotel Escuela.",
+                participantes: [
+                    {nombre: "Gisela Silva", foto: "g.jpg"},
+                    {nombre: "Tachy Molina", foto: "t.jpg"}
+                ],
+                fotos: ["m1.jpg", "m2.jpg"]
+            },
+            {
+                nombre: "2da Edición",
+                concepto: "Enfoque en la sostenibilidad y el rol de las posadas andinas.",
+                participantes: [
+                    {nombre: "Nadia Gonzales", foto: "n.jpg"},
+                    {nombre: "Elizabeth Di Dio", foto: "e.jpg"}
+                ],
+                fotos: ["m3.jpg", "m4.jpg"]
+            },
+            {
+                nombre: "3era Edición",
+                concepto: "Celebración y networking de alto nivel en la ciudad de Mérida.",
+                participantes: [
+                    {nombre: "Dora Ríos", foto: "d.jpg"},
+                    {nombre: "Vicky Herrera", foto: "v.jpg"}
+                ],
+                fotos: ["m5.jpg", "m6.jpg"]
+            }
+        ]
+    },
+    "arepazo": {
+        nombreEvento: "El Arepazo",
+        ediciones: [
+            {
+                nombre: "Edición 2024",
+                concepto: "Gran encuentro gastronómico en el centro de Mérida.",
+                participantes: [{nombre: "Chef Local", foto: "c.jpg"}],
+                fotos: ["a1.jpg"]
+            },
+            {
+                nombre: "Edición 2023",
+                concepto: "Rescate de las tradiciones culinarias andinas.",
+                participantes: [{nombre: "Maestro Arepero", foto: "c2.jpg"}],
+                fotos: ["a2.jpg"]
+            },
+            {
+                nombre: "Edición 2022",
+                concepto: "Primer encuentro masivo para celebrar nuestra cultura.",
+                participantes: [{nombre: "Cultura Mérida", foto: "c3.jpg"}],
+                fotos: ["a3.jpg"]
+            }
+        ]
+    },
+    "lideres": {
+        nombreEvento: "Líderes de Alto Impacto",
+        ediciones: [
+            {
+                nombre: "Edición I",
+                concepto: "Formación intensiva para gerentes del sector turismo.",
+                participantes: [{nombre: "Coach 1", foto: "p1.jpg"}],
+                fotos: ["l1.jpg"]
+            },
+            {
+                nombre: "Edición II",
+                concepto: "Estrategias de marketing aplicadas a la hotelería moderna.",
+                participantes: [{nombre: "Experto Marketing", foto: "p2.jpg"}],
+                fotos: ["l2.jpg"]
+            },
+            {
+                nombre: "Edición III",
+                concepto: "Liderazgo resiliente y gestión de equipos de alto desempeño.",
+                participantes: [{nombre: "Facilitador Senior", foto: "p3.jpg"}],
+                fotos: ["l3.jpg"]
+            }
+        ]
+    }
+};
+
+let categoriaActiva = null;
+
+function verDetalleGaleria(id) {
+    categoriaActiva = galeriaData[id];
+    const tabsContainer = document.getElementById('edition-tabs');
+    
+    tabsContainer.innerHTML = categoriaActiva.ediciones.map((ed, index) => `
+        <button class="btn-edition ${index === 0 ? 'active' : ''}" onclick="cambiarEdicion(${index}, this)">
+            ${ed.nombre}
+        </button>
+    `).join('');
+
+    cambiarEdicion(0);
+
+    document.getElementById('gallery-categories').style.display = 'none';
+    document.getElementById('gallery-detail').style.display = 'block';
+    document.getElementById('galeria').scrollIntoView({ behavior: 'smooth' });
+}
+
+function cambiarEdicion(index, btn = null) {
+    if(btn) {
+        document.querySelectorAll('.btn-edition').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+
+    const ed = categoriaActiva.ediciones[index];
+    const content = document.getElementById('detail-content');
+    
+    content.innerHTML = `
+        <div class="detail-layout" style="animation: fadeIn 0.4s ease;">
+            <div>
+                <h2 style="font-family:'Playfair Display'; color:var(--orange-2); margin:0 0 10px 0;">${categoriaActiva.nombreEvento}</h2>
+                <span class="badge" style="margin-bottom:20px;">${ed.nombre}</span>
+                <p style="line-height:1.7; color:var(--muted); margin-bottom:30px; font-size:15px;">${ed.concepto}</p>
+                
+                <h4 style="font-size:14px; text-transform:uppercase; color:var(--ink); border-bottom:1px solid #eee; padding-bottom:10px;">Ponentes y Participantes</h4>
+                <div class="speaker-strip">
+                    ${ed.participantes.map(p => `
+                        <div class="speaker-mini">
+                            <img src="${p.foto}" alt="${p.nombre}" onerror="this.src='https://via.placeholder.com/85'">
+                            <p><strong>${p.nombre}</strong></p>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            <div>
+                <h4 style="font-size:14px; text-transform:uppercase; color:var(--ink); margin-bottom:20px;">Galería de Imágenes</h4>
+                <div class="photo-carousel">
+                    ${ed.fotos.map(f => `<img src="${f}" alt="Edición" onerror="this.src='https://via.placeholder.com/260x300'">`).join('')}
+                </div>
+                <p style="font-size:11px; color:var(--muted); margin-top:10px;">← Desliza para navegar por la edición</p>
+            </div>
+        </div>
+    `;
+}
+
+function volverAGaleria() {
+    document.getElementById('gallery-detail').style.display = 'none';
+    document.getElementById('gallery-categories').style.display = 'grid';
+}
+
+// --- BASE DE DATOS DE EVENTOS ---
+const eventosList = { 
+    "2026-03-13": { 
+        titulo: "Turismo Con Rostro de Mujer", 
+        fecha_display: "13 de Marzo",
+        hora: "8:30 AM a 1:00 PM", 
+        lugar: "Salón Cuicas, Hotel Tibisay Mérida", 
+        costo: "5$ (Incluye certificado)", 
+        desc: "Un encuentro transformador donde exploraremos el liderazgo femenino en la industria turística andina.",
+        ponentes: ["Gisela Silva", "Tachy Molina", "María Angelina Velásquez", "Liliana Masini", "Elizabeth Di Dio", "Vicky Herrera", "Dora Ríos", "Johanna Sánchez", "Dora Monzón", "Nadia Gonzales", "Rossana Rodríguez", "María Bastidas"],
+        invitados: "Doris Villareal."
+    },
+    "2026-05-22": { titulo: "Arepazo", fecha_display: "22 de Mayo", hora: "Por definir", lugar: "Por definir", costo: "Por definir", desc: "Evento gastronómico y cultural.", ponentes: [], invitados: "Por confirmar." },
+    "2026-06-26": { titulo: "Líderes de Alto Impacto", fecha_display: "26 de Junio", hora: "Por definir", lugar: "Por definir", costo: "Por definir", desc: "Jornada de formación.", ponentes: [], invitados: "Por confirmar." }
+};
+
+let fechaActual = new Date(); 
+function generarCalendario() {
+    const grid = document.getElementById('calendar-days');
+    const label = document.getElementById('month-name');
+    const mes = fechaActual.getMonth(); 
+    const año = fechaActual.getFullYear();
+    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    label.textContent = `${meses[mes]} ${año}`;
+    const primerDia = new Date(año, mes, 1).getDay();
+    const dMes = new Date(año, mes + 1, 0).getDate();
+    grid.innerHTML = '';
+    for (let i = 0; i < primerDia; i++) grid.innerHTML += `<div class="day empty"></div>`;
+    for (let d = 1; d <= dMes; d++) {
+        const fechaKey = `${año}-${String(mes + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        let esEvento = eventosList[fechaKey];
+        const marcador = esEvento ? '<span class="event-dot">✨</span>' : '';
+        grid.innerHTML += `<div class="day ${esEvento ? 'has-event' : ''}" ${esEvento ? `onclick="abrirDetalle('${fechaKey}')"` : ''}>${d}${marcador}</div>`;
+    }
+}
+function cambiarMes(direccion) { fechaActual.setMonth(fechaActual.getMonth() + direccion); generarCalendario(); }
+function abrirDetalle(fecha) {
+    const ev = eventosList[fecha];
+    if (!ev) return;
+    document.getElementById('ev-title').textContent = ev.titulo;
+    document.getElementById('ev-time').textContent = ev.hora;
+    document.getElementById('ev-place').textContent = ev.lugar;
+    document.getElementById('ev-cost').textContent = ev.costo;
+    document.getElementById('ev-desc').textContent = ev.desc;
+    document.getElementById('ev-guest').textContent = ev.invitados;
+    document.getElementById('ev-date-display').textContent = ev.fecha_display;
+    const listContainer = document.getElementById('speakers-list');
+    const speakersSection = document.getElementById('speakers-section');
+    listContainer.innerHTML = '';
+    if(ev.ponentes.length > 0) {
+        speakersSection.style.display = "block";
+        ev.ponentes.forEach((nombre, index) => { listContainer.innerHTML += `<div>• ${index + 1}. ${nombre}</div>`; });
+    } else { speakersSection.style.display = "none"; }
+    document.getElementById('modal-event').style.display = 'grid';
+}
+function cerrarEvent() { document.getElementById('modal-event').style.display = 'none'; }
+function irAWhatsApp() {
+    const telefono = "584164715431";
+    const tituloEvento = document.getElementById('ev-title').textContent;
+    const mensaje = encodeURIComponent(`Hola Akuai, me gustaría obtener información para asistir al evento ${tituloEvento}`);
+    window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
+}
+generarCalendario();
+</script>
+</body>
+</html>
