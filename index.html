@@ -180,8 +180,41 @@ h1 { font-family: 'Playfair Display', serif; font-size: 44px; margin: 0 0 15px 0
 .speaker-mini { flex: 0 0 110px; text-align: center; font-size: 12px; }
 .speaker-mini img { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; border: 2px solid var(--orange); margin-bottom: 8px; background: #eee; }
 .photo-carousel { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px; scroll-snap-type: x mandatory; }
-.photo-carousel img { height: 260px; border-radius: 15px; scroll-snap-align: start; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+/* AJUSTE PARA FOTOS VERTICALES */
+.photo-carousel { 
+    display: flex; 
+    gap: 15px; 
+    overflow-x: auto; 
+    padding: 10px 5px 20px 5px; 
+    scroll-snap-type: x mandatory;
+    /* Suaviza el scroll en móviles */
+    -webkit-overflow-scrolling: touch; 
+}
 
+.photo-carousel img { 
+    /* Cambiamos la altura a 450px para que las verticales se vean largas y elegantes */
+    height: 450px; 
+    width: auto; /* Que el ancho se ajuste solo según la foto */
+    border-radius: 18px; 
+    scroll-snap-align: start; 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+    transition: transform 0.3s;
+}
+
+.photo-carousel img:hover {
+    transform: translateY(-5px); /* Pequeño efecto al pasar el mouse */
+}
+
+/* Ajuste para los círculos de ponentes (para que no se deformen) */
+.speaker-mini img { 
+    width: 90px; 
+    height: 90px; 
+    border-radius: 50%; 
+    object-fit: cover; /* Esto es CLAVE para que no se estiren las caras */
+    border: 2px solid var(--orange); 
+    margin-bottom: 8px; 
+    background: #f0f0f0; 
+}
 /* --- ESTILO CARRUSEL 1:1 A COLOR --- */
 .slider {
     width: 100%; height: 180px; margin: auto; overflow: hidden; position: relative; display: flex; align-items: center;
@@ -413,6 +446,125 @@ header.scrolled {
     0% { transform: translateY(-100px); opacity: 0; } 
     100% { transform: translateY(0); opacity: 1; } 
 }
+.ponente-img {
+    width: 120px; /* O el tamaño que prefieras */
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover; /* Esto evita que la imagen se estire */
+    border: 2px solid var(--orange);
+}
+.day.event-past {
+    background-color: #f8f8f8 !important; /* Gris muy claro */
+    color: #adadad !important;            /* Texto gris */
+    border: 1px dashed #ddd !important;   /* Borde punteado */
+    cursor: pointer;
+}
+.day.event-past .event-dot {
+    filter: grayscale(1);
+}
+/* --- AJUSTE DE DISEÑO PARA GALERÍA HORIZONTAL --- */
+
+#ev-gallery-photos {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important; /* Permite deslizar a los lados */
+    overflow-y: hidden !important;
+    gap: 12px !important;
+    padding: 10px 0 20px 0 !important;
+    width: 100% !important;
+    /* Suavizado para móviles */
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+/* --- AJUSTE DE DISEÑO PROFESIONAL --- */
+
+/* 1. Limitamos el contenedor para que no se salga de la caja blanca */
+.detail-layout {
+    display: grid !important;
+    grid-template-columns: 350px 1fr !important; /* Columna izquierda fija, derecha flexible */
+    gap: 30px !important;
+    align-items: start !important;
+    overflow: hidden !important; /* Evita que el carrusel rompa el borde del modal */
+    padding: 20px;
+}
+
+/* 2. El carrusel ahora tendrá una altura más elegante */
+#ev-gallery-photos {
+    display: flex !important;
+    gap: 15px !important;
+    overflow-x: auto !important;
+    padding-bottom: 15px !important;
+    /* Creamos un margen interno a la derecha para que la última foto no pegue al borde */
+    padding-right: 50px !important; 
+}
+
+/* 3. Ajustamos las fotos para que no sean tan imponentes */
+#ev-gallery-photos img {
+    height: 380px !important; /* Tamaño ideal según tu captura */
+    width: auto !important;
+    border-radius: 25px !important; /* Bordes más redondeados como en tu imagen */
+    flex-shrink: 0 !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    transition: transform 0.3s ease;
+}
+
+/* 4. Mejoramos la zona de Ponentes para que no se vea amontonada */
+.speaker-strip {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
+    margin-top: 15px !important;
+}
+
+.speaker-mini img {
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 50% !important;
+}
+
+/* FLECHAS UNIFICADAS */
+.nav-arrow {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 45px !important;
+    height: 45px !important;
+    background: #E07A1F !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    z-index: 100 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 20px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+}
+
+.nav-arrow.left { left: -20px !important; }
+.nav-arrow.right { right: -20px !important; }
+
+/* AJUSTE DEL CARRUSEL */
+.photo-carousel {
+    display: flex !important;
+    gap: 15px !important;
+    overflow-x: auto !important;
+    scroll-behavior: smooth !important;
+    padding: 10px 0 !important;
+    scrollbar-width: none !important; /* Oculta scroll en Firefox */
+}
+
+.photo-carousel::-webkit-scrollbar {
+    display: none !important; /* Oculta scroll en Chrome/Safari */
+}
+
+.photo-carousel img {
+    height: 450px !important;
+    flex: 0 0 auto !important; /* Evita que las fotos se encojan */
+    border-radius: 18px !important;
+}
 </style>
 </head>
 
@@ -531,7 +683,7 @@ header.scrolled {
     
     <div id="gallery-categories" class="gallery-grid">
       <div class="gallery-item" onclick="verDetalleGaleria('mujer')">
-        <img src="foto-turismo-mujer.jpg" alt="Turismo con Rostro de Mujer">
+        <img src="trm.png" alt="Turismo con Rostro de Mujer">
         <div class="gallery-overlay">
           <h3>Turismo con Rostro de Mujer</h3>
           <p style="font-size: 12px; opacity: 0.9;">Explorar ediciones anteriores</p>
@@ -757,10 +909,10 @@ const galeriaData = {
                 nombre: "1era Edición",
                 concepto: "Lanzamiento oficial del movimiento de liderazgo femenino en el Hotel Escuela.",
                 participantes: [
-                    {nombre: "Gisela Silva", foto: "g.jpg"},
+                    {nombre: "Gisela Silva", foto: "mujer1.png"},
                     {nombre: "Tachy Molina", foto: "t.jpg"}
                 ],
-                fotos: ["m1.jpg", "m2.jpg"]
+                fotos: ["g.png", "g1.png", "g2.png"]
             },
             {
                 nombre: "2da Edición",
@@ -861,10 +1013,10 @@ function cambiarEdicion(index, btn = null) {
     const content = document.getElementById('detail-content');
     
     content.innerHTML = `
-        <div class="detail-layout" style="animation: fadeIn 0.4s ease;">
+        <div class="detail-layout">
             <div>
                 <h2 style="font-family:'Playfair Display'; color:var(--orange-2); margin:0 0 10px 0;">${categoriaActiva.nombreEvento}</h2>
-                <span class="badge" style="margin-bottom:20px;">${ed.nombre}</span>
+                <span class="badge" style="margin-bottom:20px; display:inline-block;">${ed.nombre}</span>
                 <p style="line-height:1.7; color:var(--muted); margin-bottom:30px; font-size:15px;">${ed.concepto}</p>
                 
                 <h4 style="font-size:14px; text-transform:uppercase; color:var(--ink); border-bottom:1px solid #eee; padding-bottom:10px;">Ponentes y Participantes</h4>
@@ -877,17 +1029,25 @@ function cambiarEdicion(index, btn = null) {
                     `).join('')}
                 </div>
             </div>
-            <div>
+            
+            <div style="position: relative; min-width: 0;">
                 <h4 style="font-size:14px; text-transform:uppercase; color:var(--ink); margin-bottom:20px;">Galería de Imágenes</h4>
-                <div class="photo-carousel">
-                    ${ed.fotos.map(f => `<img src="${f}" alt="Edición" onerror="this.src='https://via.placeholder.com/260x300'">`).join('')}
+                
+                <div class="gallery-container-wrapper" style="position: relative; display: flex; align-items: center;">
+                    
+                    <button class="nav-arrow left" onclick="document.getElementById('carrusel-fotos').scrollBy({left: -400, behavior: 'smooth'})">❮</button>
+                    
+                    <div id="carrusel-fotos" class="photo-carousel">
+                        ${ed.fotos.map(f => `<img src="${f}" alt="Edición" onerror="this.src='https://via.placeholder.com/260x450'">`).join('')}
+                    </div>
+
+                    <button class="nav-arrow right" onclick="document.getElementById('carrusel-fotos').scrollBy({left: 400, behavior: 'smooth'})">❯</button>
+                
                 </div>
-                <p style="font-size:11px; color:var(--muted); margin-top:10px;">← Desliza para navegar por la edición</p>
             </div>
         </div>
     `;
 }
-
 function volverAGaleria() {
     document.getElementById('gallery-detail').style.display = 'none';
     document.getElementById('gallery-categories').style.display = 'grid';
@@ -899,7 +1059,7 @@ const eventosList = {
         titulo: "Turismo Con Rostro de Mujer", 
         fecha_display: "13 de Marzo",
         hora: "8:30 AM a 1:00 PM", 
-        lugar: "Salón Cuicas, Hotel Tibisay Mérida", 
+        lugar: "Salón Sierra, Hotel Tibisay Mérida", 
         costo: "5$ (Incluye certificado)", 
         desc: "Un encuentro transformador donde exploraremos el liderazgo femenino en la industria turística andina.",
         ponentes: ["Gisela Silva", "Tachy Molina", "María Angelina Velásquez", "Liliana Masini", "Elizabeth Di Dio", "Vicky Herrera", "Dora Ríos", "Johanna Sánchez", "Dora Monzón", "Nadia Gonzales", "Rossana Rodríguez", "María Bastidas"],
@@ -916,16 +1076,49 @@ function generarCalendario() {
     const mes = fechaActual.getMonth(); 
     const año = fechaActual.getFullYear();
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    
     label.textContent = `${meses[mes]} ${año}`;
+    
+    // 1. Obtenemos la fecha de HOY y le quitamos la hora para comparar solo el día
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
     const primerDia = new Date(año, mes, 1).getDay();
     const dMes = new Date(año, mes + 1, 0).getDate();
+    
     grid.innerHTML = '';
-    for (let i = 0; i < primerDia; i++) grid.innerHTML += `<div class="day empty"></div>`;
+    
+    for (let i = 0; i < primerDia; i++) {
+        grid.innerHTML += `<div class="day empty"></div>`;
+    }
+
     for (let d = 1; d <= dMes; d++) {
         const fechaKey = `${año}-${String(mes + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        
+        // 2. Creamos un objeto de fecha para el día que estamos dibujando
+        const fechaCelda = new Date(año, mes, d);
+        
         let esEvento = eventosList[fechaKey];
-        const marcador = esEvento ? '<span class="event-dot">✨</span>' : '';
-        grid.innerHTML += `<div class="day ${esEvento ? 'has-event' : ''}" ${esEvento ? `onclick="abrirDetalle('${fechaKey}')"` : ''}>${d}${marcador}</div>`;
+        let claseExtra = '';
+        let marcador = '';
+
+        if (esEvento) {
+            // 3. Si el evento ya pasó, le ponemos una clase diferente y un emoji de 'check'
+            if (fechaCelda < hoy) {
+                claseExtra = 'event-past'; 
+                marcador = '<span class="event-dot" style="filter: grayscale(1); opacity: 0.6;">✔️</span>';
+            } else {
+                claseExtra = 'has-event';
+                marcador = '<span class="event-dot">✨</span>';
+            }
+        }
+
+        // 4. Construimos la celda con la clase dinámica (has-event o event-past)
+        grid.innerHTML += `
+            <div class="day ${claseExtra}" 
+                 ${esEvento ? `onclick="abrirDetalle('${fechaKey}')"` : ''}>
+                 ${d}${marcador}
+            </div>`;
     }
 }
 function cambiarMes(direccion) { fechaActual.setMonth(fechaActual.getMonth() + direccion); generarCalendario(); }
