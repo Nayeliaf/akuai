@@ -41,18 +41,34 @@ a { text-decoration: none; color: inherit; }
 
 /* HEADER */
 header {
-  position: sticky; top: 0; z-index: 100;
+  position: relative; /* ya NO sticky desde el inicio */
+  top: 0;
+  z-index: 100;
   backdrop-filter: saturate(140%) blur(10px);
   background: rgba(246,239,231,.85);
   border-bottom: 1px solid var(--stroke);
+  transition: background 0.35s cubic-bezier(0.22, 1, 0.36, 1), 
+              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.topbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
+
+/* cuando ya bajaste: se pega arriba */
+header.is-sticky {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; transition: padding 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
 .brand { display: flex; align-items: center; gap: 12px; }
 .logo {
   width: var(--logo-size); height: var(--logo-size); border-radius: 14px;
   background: linear-gradient(135deg, var(--orange), var(--orange-2));
   display: grid; place-items: center;
   box-shadow: 0 10px 25px rgba(224,122,31,.25);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .logo img { width: calc(var(--logo-size) * var(--logo-scale)); height: calc(var(--logo-size) * var(--logo-scale)); object-fit: contain; }
 .brand strong { font-size: 15px; display: block; }
@@ -93,14 +109,14 @@ h1 { font-family: 'Playfair Display', serif; font-size: 44px; margin: 0 0 15px 0
 .about-card p { line-height: 1.6; color: #555; font-size: 15px; }
 
 .calendar-container {
-    max-width: 100%; /* Cambiado de 800px a 100% */
+    max-width: 100%;
     margin: 10px auto; 
     background: white; 
-    padding: 15px; /* Reducido para ganar espacio */
+    padding: 15px;
     border-radius: 24px; 
     box-shadow: var(--shadow); 
     border: 1px solid var(--stroke);
-    overflow: hidden; /* Evita desbordamientos */
+    overflow: hidden;
 }
 
 .calendar-header {
@@ -110,7 +126,7 @@ h1 { font-family: 'Playfair Display', serif; font-size: 44px; margin: 0 0 15px 0
     font-weight: 700; 
     color: var(--orange-2); 
     padding-bottom: 15px; 
-    font-size: 11px; /* Fuente más pequeña para que no choque */
+    font-size: 11px;
     text-transform: uppercase;
     border-bottom: 1px solid #eee; 
     margin-bottom: 15px;
@@ -119,7 +135,7 @@ h1 { font-family: 'Playfair Display', serif; font-size: 44px; margin: 0 0 15px 0
 .calendar-grid { 
     display: grid; 
     grid-template-columns: repeat(7, 1fr); 
-    gap: 5px; /* Espacio reducido entre días */
+    gap: 5px;
 }
 
 .day {
@@ -128,12 +144,11 @@ h1 { font-family: 'Playfair Display', serif; font-size: 44px; margin: 0 0 15px 0
     align-items: center; 
     justify-content: center;
     border-radius: 8px; 
-    font-size: 14px; /* Tamaño de número ajustado */
+    font-size: 14px;
     color: #444; 
-transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Ajuste específico para que el círculo de evento no deforme la caja */
 .day.has-event {
     background: rgba(224,122,31,0.05); 
     color: var(--orange-2); 
@@ -149,7 +164,6 @@ transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 /* --- ESTILOS DE GALERÍA (NUEVOS) --- */
 .gallery-grid { 
     display: grid; 
-    /* Cambiado a 250px para que quepa en cualquier celular */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
     gap: 20px; 
 }
@@ -157,18 +171,18 @@ transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     position: relative; 
     border-radius: 20px; 
     overflow: hidden; 
-    height: 300px; /* Bajamos de 380px a 300px para móvil */
+    height: 300px; 
     box-shadow: var(--shadow); 
     cursor: pointer; 
     border: 1px solid var(--stroke); 
-}.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+}
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
 .gallery-overlay { 
     position: absolute; 
     top: 0; 
     left: 0; 
     width: 100%; 
     height: 100%; 
-    /* Cambiamos de gris/negro a un degradado naranja cálido */
     background: linear-gradient(to top, rgba(224, 122, 31, 0.92), rgba(199, 100, 18, 0.4), transparent 80%); 
     display: flex; 
     flex-direction: column; 
@@ -196,21 +210,18 @@ transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 .speaker-mini { flex: 0 0 110px; text-align: center; font-size: 12px; }
 .speaker-mini img { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; border: 2px solid var(--orange); margin-bottom: 8px; background: #eee; }
 .photo-carousel { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px; scroll-snap-type: x mandatory; }
-/* AJUSTE PARA FOTOS VERTICALES */
 .photo-carousel { 
     display: flex; 
     gap: 15px; 
     overflow-x: auto; 
     padding: 10px 5px 20px 5px; 
     scroll-snap-type: x mandatory;
-    /* Suaviza el scroll en móviles */
     -webkit-overflow-scrolling: touch; 
 }
 
 .photo-carousel img { 
-    /* Cambiamos la altura a 450px para que las verticales se vean largas y elegantes */
     height: 450px; 
-    width: auto; /* Que el ancho se ajuste solo según la foto */
+    width: auto; 
     border-radius: 18px; 
     scroll-snap-align: start; 
     box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
@@ -218,19 +229,19 @@ transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .photo-carousel img:hover {
-    transform: translateY(-5px); /* Pequeño efecto al pasar el mouse */
+    transform: translateY(-5px);
 }
 
-/* Ajuste para los círculos de ponentes (para que no se deformen) */
 .speaker-mini img { 
     width: 90px; 
     height: 90px; 
     border-radius: 50%; 
-    object-fit: cover; /* Esto es CLAVE para que no se estiren las caras */
+    object-fit: cover; 
     border: 2px solid var(--orange); 
     margin-bottom: 8px; 
     background: #f0f0f0; 
 }
+
 /* --- ESTILO CARRUSEL 1:1 A COLOR --- */
 .slider {
     width: 100%; height: 180px; margin: auto; overflow: hidden; position: relative; display: flex; align-items: center;
@@ -283,52 +294,47 @@ transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 footer { text-align: center; padding: 40px 0; background: #fff; color: var(--muted); font-size: 14px; }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
 @media (max-width: 920px) {
-    /* Ajustes de Header y Navegación */
     .topbar { flex-direction: column; gap: 15px; padding: 15px 0; }
     nav { 
         overflow-x: auto; 
         width: 100%; 
         justify-content: flex-start; 
         padding-bottom: 8px;
-        -webkit-overflow-scrolling: touch; /* Scroll suave en iPhone */
+        -webkit-overflow-scrolling: touch;
     }
     nav a { font-size: 12px; padding: 6px 10px; }
 
-    /* Ajustes de Textos y Hero */
     .hero-grid { grid-template-columns: 1fr; gap: 20px; }
     h1 { font-size: 32px; text-align: center; }
     .lead { font-size: 16px; text-align: center; }
     .hero-card { padding: 25px; text-align: center; }
     .stat-card { padding: 30px; text-align: center; }
 
-    /* Ajustes de Secciones */
     section { padding: 50px 0; }
     h2.section-title { font-size: 28px; }
 
-    /* Galería y Detalles */
     .gallery-item { height: 300px; }
     .detail-layout { grid-template-columns: 1fr; gap: 30px; }
     .photo-carousel img { height: 200px; }
 
-    /* Formulario: Muy importante para que no se salga de la pantalla */
     .form-container { 
         padding: 25px 15px; 
         margin: 10px;
         border-radius: 15px;
     }
-    .grid-options { grid-template-columns: 1fr; } /* Opciones una debajo de otra */
+    .grid-options { grid-template-columns: 1fr; }
 
-    /* Footer */
     .footer-banner { height: 200px; }
 }
 
-/* Ajuste extra para teléfonos muy pequeños (iPhone SE, etc) */
 @media (max-width: 400px) {
     h1 { font-size: 26px; }
     .calendar-header { font-size: 9px; }
     .day { font-size: 11px; }
 }
+
 /* --- EFECTO DE APARICIÓN AL BAJAR --- */
 .reveal {
   opacity: 0;
@@ -342,9 +348,13 @@ footer { text-align: center; padding: 40px 0; background: #fff; color: var(--mut
 
 /* EFECTO HEADER AL HACER SCROLL */
 header.scrolled {
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
   background: rgba(246,239,231,0.98);
 }
+header.scrolled .topbar { padding: 8px 0; }
+header.scrolled .logo { transform: scale(0.88); }
+header.scrolled nav a { font-size: 12px; }
+
 /* --- ESTILOS DEL SMART WIDGET (CELULAR) --- */
 .contact-layout { 
     display: grid; 
@@ -372,7 +382,6 @@ header.scrolled {
     position: relative; 
 }
 
-/* Efecto de inclinación al pasar el mouse */
 .phone-frame:hover { transform: rotateY(-10deg) rotateX(5deg); }
 
 .phone-screen { 
@@ -463,72 +472,66 @@ header.scrolled {
     100% { transform: translateY(0); opacity: 1; } 
 }
 .ponente-img {
-    width: 120px; /* O el tamaño que prefieras */
+    width: 120px;
     height: 120px;
     border-radius: 50%;
-    object-fit: cover; /* Esto evita que la imagen se estire */
+    object-fit: cover;
     border: 2px solid var(--orange);
 }
 .day.event-past {
-    background-color: #f8f8f8 !important; /* Gris muy claro */
-    color: #adadad !important;            /* Texto gris */
-    border: 1px dashed #ddd !important;   /* Borde punteado */
+    background-color: #f8f8f8 !important;
+    color: #adadad !important;
+    border: 1px dashed #ddd !important;
     cursor: pointer;
 }
 .day.event-past .event-dot {
     filter: grayscale(1);
 }
-/* --- AJUSTE DE DISEÑO PARA GALERÍA HORIZONTAL --- */
 
+/* --- AJUSTE DE DISEÑO PARA GALERÍA HORIZONTAL --- */
 #ev-gallery-photos {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
-    overflow-x: auto !important; /* Permite deslizar a los lados */
+    overflow-x: auto !important;
     overflow-y: hidden !important;
     gap: 12px !important;
     padding: 10px 0 20px 0 !important;
     width: 100% !important;
-    /* Suavizado para móviles */
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
 }
-/* --- AJUSTE DE DISEÑO PROFESIONAL --- */
 
-/* 1. Limitamos el contenedor para que no se salga de la caja blanca */
+/* --- AJUSTE DE DISEÑO PROFESIONAL --- */
 .detail-layout {
     display: grid !important;
-    grid-template-columns: minmax(0, 350px) minmax(0, 1fr) !important; /* Columna izquierda fija, derecha flexible (FIX overflow móvil) */
+    grid-template-columns: minmax(0, 350px) minmax(0, 1fr) !important;
     gap: 30px !important;
     align-items: start !important;
-    overflow: hidden !important; /* Evita que el carrusel rompa el borde del modal */
+    overflow: hidden !important;
     padding: 20px;
 }
 
-/* 2. El carrusel ahora tendrá una altura más elegante */
 #ev-gallery-photos {
     display: flex !important;
     gap: 15px !important;
     overflow-x: auto !important;
     padding-bottom: 15px !important;
-    /* Creamos un margen interno a la derecha para que la última foto no pegue al borde */
     padding-right: 50px !important; 
 }
 
-/* 3. Ajustamos las fotos para que no sean tan imponentes */
 #ev-gallery-photos img {
-    height: 380px !important; /* Tamaño ideal según tu captura */
+    height: 380px !important;
     width: auto !important;
-    border-radius: 25px !important; /* Bordes más redondeados como en tu imagen */
+    border-radius: 25px !important;
     flex-shrink: 0 !important;
     box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
     transition: transform 0.3s ease;
 }
 
-/* Contenedor de las 12 ponentes */
 .speaker-grid-layout {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 ponentes por fila en PC */
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
     margin-top: 20px;
 }
@@ -572,17 +575,16 @@ header.scrolled {
     }
 }
 
-/* Contenedor relativo para que las flechas se peguen a la foto */
 .gallery-container-fixed {
     position: relative;
     width: 100%;
-    max-width: 500px; /* Tamaño de la foto centrada */
+    max-width: 500px;
     margin: 0 auto;
 }
 
 #carrusel-fotos {
     display: flex !important;
-    overflow-x: hidden !important; /* Escondemos barra para que sea elegante */
+    overflow-x: hidden !important;
     scroll-behavior: smooth;
     gap: 0 !important;
     border-radius: 25px;
@@ -595,14 +597,13 @@ header.scrolled {
     object-fit: cover !important;
 }
 
-/* La interfaz de la flecha como la tenías antes */
 .nav-arrow {
     position: absolute !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
     width: 45px !important;
     height: 45px !important;
-    background: #E07A1F !important; /* Tu naranja */
+    background: #E07A1F !important;
     color: white !important;
     border: none !important;
     border-radius: 50% !important;
@@ -615,7 +616,6 @@ header.scrolled {
     font-size: 18px !important;
 }
 
-/* Posición exacta sobre los bordes de la imagen */
 .nav-arrow.left { left: -22px !important; }
 .nav-arrow.right { right: -22px !important; }
 
@@ -623,31 +623,26 @@ header.scrolled {
     background: #c36616 !important;
     transform: translateY(-50%) scale(1.1) !important;
 }
+
 /* =========================
    FIX RESPONSIVE (MÓVIL)
-   PÉGALO AL FINAL DEL CSS
 ========================= */
-
-/* 1) Evita desbordes horizontales fantasmas */
 html, body {
   width: 100%;
   overflow-x: hidden;
 }
 
-/* 2) El modal de evento: en móvil que respire y no “apriete” */
 @media (max-width: 600px) {
   .custom-modal {
     padding: 18px !important;
     border-radius: 16px !important;
   }
 
-  /* ese bloque de 2 columnas (horario/lugar/etc) en móvil a 1 columna */
   #modal-event .custom-modal > div[style*="grid-template-columns: 1fr 1fr"] {
     grid-template-columns: 1fr !important;
   }
 }
 
-/* 3) GALERÍA DETALLE: tu .detail-layout NO puede tener 350px fijo en móvil */
 @media (max-width: 920px) {
   .detail-layout {
     grid-template-columns: 1fr !important;
@@ -655,30 +650,25 @@ html, body {
   }
 }
 
-/* 4) Carrusel grande: 600px de alto revienta el móvil */
 @media (max-width: 920px) {
   #carrusel-fotos img {
-    height: 320px !important; /* prueba 280-360 según te guste */
+    height: 320px !important;
   }
 
   .gallery-container-fixed {
     max-width: 100% !important;
   }
 
-  /* flechas pegadas pero sin salirse */
   .nav-arrow.left { left: 8px !important; }
   .nav-arrow.right { right: 8px !important; }
 }
 
-/* 5) Ponentes en detalle: 4 columnas en móvil queda mini.
-      Mejor 2 columnas o 3 según ancho */
 @media (max-width: 600px) {
   .speaker-grid-layout {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
-/* 6) “Phone mockup” del contacto: en móvil que se adapte */
 @media (max-width: 420px) {
   .phone-frame {
     width: 230px;
@@ -689,12 +679,12 @@ html, body {
   }
 }
 
-/* 7) Tip: nav con scroll horizontal ok, pero evita que crezca de alto raro */
 @media (max-width: 920px) {
   nav {
     white-space: nowrap;
   }
 }
+
 .gallery-item {
     transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
                 box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
@@ -704,6 +694,7 @@ html, body {
     transform: translateY(-8px);
     box-shadow: 0 25px 60px rgba(0,0,0,0.15);
 }
+
 .fade-swap {
     animation: smoothFade 0.5s ease;
 }
@@ -718,6 +709,7 @@ html, body {
         transform: translateY(0);
     }
 }
+
 /* =========================
    SEPARADOR CON PICO (SVG PRO)
 ========================= */
@@ -728,7 +720,7 @@ html, body {
   gap: 14px;
   margin: -20px 0 30px;
   padding: 10px 0;
-  color: var(--orange); /* el SVG hereda este color */
+  color: var(--orange);
 }
 
 .section-divider::before,
@@ -740,7 +732,6 @@ html, body {
   background: linear-gradient(90deg, transparent, rgba(224,122,31,0.55), transparent);
 }
 
-/* SVG limpio / nítido */
 .section-divider .divider-icon {
   width: 56px;
   height: auto;
@@ -751,7 +742,6 @@ html, body {
   opacity: 0.98;
 }
 
-/* móvil */
 @media (max-width: 600px) {
   .section-divider {
     margin: -10px 0 22px;
@@ -805,6 +795,7 @@ html, body {
         </div>
     </div>
 </div>
+
 <header>
   <div class="wrap topbar">
     <a href="#" class="brand">
@@ -829,25 +820,6 @@ html, body {
   <section class="hero">
     <div class="hero-grid">
       <div class="hero-card">
-            <div class="section-divider" aria-hidden="true">
-  <svg class="divider-icon" viewBox="0 0 792 612" xmlns="http://www.w3.org/2000/svg" role="presentation" focusable="false">
-    <g fill="currentColor">
-      <path d="M701.55,375.866c-68.514-45.727-137.357-90.976-205.325-137.497c-18.329-12.546-32.705-12.939-49.937,1.333
-      c-22.768,18.856-46.529,36.682-71.017,53.254c-17.1,11.572-13.663,18.577,0.794,29.052c19.268,13.96,40.581,25.801,56.588,45.826
-      c-16.151,4.196-28.076-3.177-40.039-8.633c-17.947-8.185-37.85-14.595-52.528-26.949c-44.322-37.302-84.764-36.886-129.639,0.396
-      c-24.266,20.16-55.016,32.561-82.842,48.462c-7.111,4.17-11.065,3.012-10.317-6.078c47.395-40.634,94.899-81.143,142.086-122.016
-      c8.774-7.6,16.166-5.411,24.055,0.397c15.161,11.163,30.837,21.718,45.261,33.761c12.189,10.177,20.297,9.88,30.867-3.032
-      c28.352-34.636,58.92-67.478,86.986-102.331c15.368-19.084,29.682-20.176,47.407-5.058
-      c61.978,52.866,124.124,105.532,182.129,162.828c11.356,11.218,23.647,21.495,35.506,32.205
-      C710.845,379.514,707.097,379.889,701.55,375.866z"/>
-      <path d="M117.289,375.031c3.44,2.025,6.88,4.05,10.318,6.077c-11.159,11.922-25.97,17.792-43.102,21.525
-      C95.433,393.432,106.361,384.232,117.289,375.031z"/>
-      <path d="M701.55,375.866c3.345-1.36,6.69-2.72,10.036-4.08c10.997,4.268,18.138,12.494,28.181,27.267
-      C722.217,391.152,711.123,384.87,701.55,375.866z"/>
-    </g>
-  </svg>
-</div>
-
         <div class="badge">Hotel Escuela de los Andes Venezolanos · Gestión Turística</div>
         <h1>Elevando sueños y transformando realidades.</h1>
         <p class="lead">Excelencia y Calidad en cada detalle.</p>
@@ -961,21 +933,21 @@ html, body {
         <img src="trm.png" alt="Turismo con Rostro de Mujer">
         <div class="gallery-overlay">
           <h3>Turismo con Rostro de Mujer</h3>
-          <p style="font-size: 12px; opacity: 0.9;">Toca para ver más</p>
+          <p style="font-size: 12px; opacity: 0.9;">Explorar ediciones anteriores</p>
         </div>
       </div>
       <div class="gallery-item" onclick="verDetalleGaleria('arepazo')">
         <img src="foto-arepazo.jpg" alt="Arepazo">
         <div class="gallery-overlay">
           <h3>El Arepazo</h3>
-          <p style="font-size: 12px; opacity: 0.9;">Toca para ver más</p>
+          <p style="font-size: 12px; opacity: 0.9;">Memorias gastronómicas</p>
         </div>
       </div>
       <div class="gallery-item" onclick="verDetalleGaleria('lideres')">
         <img src="foto-lideres.jpg" alt="Líderes">
         <div class="gallery-overlay">
           <h3>Líderes de Alto Impacto</h3>
-          <p style="font-size: 12px; opacity: 0.9;">Toca para ver más</p>
+          <p style="font-size: 12px; opacity: 0.9;">Formación y excelencia</p>
         </div>
       </div>
     </div>
@@ -1062,7 +1034,7 @@ html, body {
 <div id="form-wrapper">
     <div class="form-container">
         <h3 style="font-family:'Playfair Display'; font-size: 26px; margin-top: 0; color: var(--orange-2);">Registro de Interés</h3>
-        <form id="akuaiForm" action="https://formsubmit.co/npaf31@gmail.com" method="POST">
+        <form id="akuaiForm" action="https://formsubmit.co/akuai.comunicaciones@gmail.com" method="POST">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_next" value="http://127.0.0.1:5500/index.html">
 
@@ -1322,14 +1294,12 @@ function verDetalleGaleria(id) {
     categoriaActiva = galeriaData[id];
     const tabsContainer = document.getElementById('edition-tabs');
     
-    // Generar botones de ediciones
     tabsContainer.innerHTML = categoriaActiva.ediciones.map((ed, index) => `
         <button class="btn-edition ${index === 0 ? 'active' : ''}" onclick="cambiarEdicion(${index}, this)">
             ${ed.nombre}
         </button>
     `).join('');
 
-    // Mostrar primera edición por defecto
     cambiarEdicion(0);
 
     document.getElementById('gallery-categories').style.display = 'none';
@@ -1345,12 +1315,11 @@ function cambiarEdicion(index, btn = null) {
 
     const ed = categoriaActiva.ediciones[index];
     const content = document.getElementById('detail-content');
-    
-    content.innerHTML = `
-    content.classList.remove("fade-swap");
-void content.offsetWidth; 
-content.classList.add("fade-swap");
 
+    content.classList.remove("fade-swap");
+    void content.offsetWidth;
+
+    content.innerHTML = `
         <div class="detail-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
             
             <div>
@@ -1382,6 +1351,8 @@ content.classList.add("fade-swap");
             </div>
         </div>
     `;
+
+    content.classList.add("fade-swap");
 }
 function volverAGaleria() {
     document.getElementById('gallery-detail').style.display = 'none';
@@ -1414,7 +1385,6 @@ function generarCalendario() {
     
     label.textContent = `${meses[mes]} ${año}`;
     
-    // 1. Obtenemos la fecha de HOY y le quitamos la hora para comparar solo el día
     const hoy = new Date();
     hoy.setHours(0, 0, 0, 0);
 
@@ -1429,8 +1399,6 @@ function generarCalendario() {
 
     for (let d = 1; d <= dMes; d++) {
         const fechaKey = `${año}-${String(mes + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-        
-        // 2. Creamos un objeto de fecha para el día que estamos dibujando
         const fechaCelda = new Date(año, mes, d);
         
         let esEvento = eventosList[fechaKey];
@@ -1438,7 +1406,6 @@ function generarCalendario() {
         let marcador = '';
 
         if (esEvento) {
-            // 3. Si el evento ya pasó, le ponemos una clase diferente y un emoji de 'check'
             if (fechaCelda < hoy) {
                 claseExtra = 'event-past'; 
                 marcador = '<span class="event-dot" style="filter: grayscale(1); opacity: 0.6;">✔️</span>';
@@ -1448,7 +1415,6 @@ function generarCalendario() {
             }
         }
 
-        // 4. Construimos la celda con la clase dinámica (has-event o event-past)
         grid.innerHTML += `
             <div class="day ${claseExtra}" 
                  ${esEvento ? `onclick="abrirDetalle('${fechaKey}')"` : ''}>
@@ -1484,32 +1450,46 @@ function irAWhatsApp() {
     window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
 }
 generarCalendario();
+
 function reveal() {
   var reveals = document.querySelectorAll(".reveal");
   for (var i = 0; i < reveals.length; i++) {
     var windowHeight = window.innerHeight;
     var elementTop = reveals[i].getBoundingClientRect().top;
-    var elementVisible = 150; // Distancia para que se active
+    var elementVisible = 150;
     if (elementTop < windowHeight - elementVisible) {
       reveals[i].classList.add("active");
     }
   }
 }
 
-// Escuchar el evento de scroll para el header y las animaciones
+const header = document.querySelector("header");
+let headerH = header.offsetHeight;
+
+window.addEventListener("resize", function () {
+  headerH = header.offsetHeight;
+});
+
 window.addEventListener("scroll", function() {
   reveal();
-  
-  // Cambiar estilo del header
-  const header = document.querySelector("header");
+
+  // efecto visual (el que ya tenías)
   if (window.scrollY > 50) {
     header.classList.add("scrolled");
   } else {
     header.classList.remove("scrolled");
   }
+
+  // 👇 Sticky solo después de bajar
+  if (window.scrollY > headerH) {
+    header.classList.add("is-sticky");
+    document.body.style.paddingTop = headerH + "px";
+  } else {
+    header.classList.remove("is-sticky");
+    document.body.style.paddingTop = "0px";
+  }
 });
 
-// Ejecutar una vez al cargar para mostrar lo que ya está en pantalla
 reveal();
 
 function actualizarHora() {
