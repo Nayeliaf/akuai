@@ -509,61 +509,84 @@ header.scrolled {
     transition: transform 0.3s ease;
 }
 
-/* 4. Mejoramos la zona de Ponentes para que no se vea amontonada */
-.speaker-strip {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 20px !important;
-    margin-top: 15px !important;
+/* Contenedor de las 12 ponentes */
+.speaker-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 ponentes por fila en PC */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.speaker-mini {
+    text-align: center;
+    background: #fff;
+    padding: 10px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.speaker-mini:hover {
+    transform: translateY(-5px);
 }
 
 .speaker-mini img {
     width: 80px !important;
     height: 80px !important;
     border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 2px solid var(--orange);
+    margin-bottom: 8px;
+}
+/* Contenedor relativo para que las flechas se peguen a la foto */
+.gallery-container-fixed {
+    position: relative;
+    width: 100%;
+    max-width: 500px; /* Tamaño de la foto centrada */
+    margin: 0 auto;
 }
 
-/* FLECHAS UNIFICADAS */
+#carrusel-fotos {
+    display: flex !important;
+    overflow-x: hidden !important; /* Escondemos barra para que sea elegante */
+    scroll-behavior: smooth;
+    gap: 0 !important;
+    border-radius: 25px;
+}
+
+#carrusel-fotos img {
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    height: 600px !important;
+    object-fit: cover !important;
+}
+
+/* La interfaz de la flecha como la tenías antes */
 .nav-arrow {
     position: absolute !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
     width: 45px !important;
     height: 45px !important;
-    background: #E07A1F !important;
+    background: #E07A1F !important; /* Tu naranja */
     color: white !important;
     border: none !important;
     border-radius: 50% !important;
     cursor: pointer !important;
-    z-index: 100 !important;
+    z-index: 10 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-size: 20px !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important;
+    font-size: 18px !important;
 }
 
-.nav-arrow.left { left: -20px !important; }
-.nav-arrow.right { right: -20px !important; }
+/* Posición exacta sobre los bordes de la imagen */
+.nav-arrow.left { left: -22px !important; }
+.nav-arrow.right { right: -22px !important; }
 
-/* AJUSTE DEL CARRUSEL */
-.photo-carousel {
-    display: flex !important;
-    gap: 15px !important;
-    overflow-x: auto !important;
-    scroll-behavior: smooth !important;
-    padding: 10px 0 !important;
-    scrollbar-width: none !important; /* Oculta scroll en Firefox */
-}
-
-.photo-carousel::-webkit-scrollbar {
-    display: none !important; /* Oculta scroll en Chrome/Safari */
-}
-
-.photo-carousel img {
-    height: 450px !important;
-    flex: 0 0 auto !important; /* Evita que las fotos se encojan */
-    border-radius: 18px !important;
+.nav-arrow:hover {
+    background: #c36616 !important;
+    transform: translateY(-50%) scale(1.1) !important;
 }
 </style>
 </head>
@@ -646,21 +669,23 @@ header.scrolled {
     <h2 class="section-title">Conócenos</h2>
     <div style="max-width: 800px; margin: auto; text-align: center; margin-bottom: 50px;">
         <p style="font-size: 18px; line-height: 1.8; color: #444;">
-            En <strong>Akuai Eventos</strong>, creemos que cada encuentro es una oportunidad para impactar vidas. Nacemos de la pasión por la gestión turística y el compromiso con la excelencia en el estado Mérida.
-        </p>
-    </div>
+          <strong>Akuai Eventos</strong>, es más que una organizadora de eventos: es un laboratorio de experiencias donde los estudiantes convierten ideas en realidades. Cada evento es un espacio de formación, conexión y transformación profesional. Aquí no solo se planifica, se aprende haciendo.
+          </div>
+              <div style="max-width: 800px; margin: auto; text-align: center; margin-bottom: 50px;">
+        <p style="font-size: 18px; line-height: 1.8; color: #444;">
+Nuestro nombre proviene de “a kuai”, que significa altura <strong>altura</strong> en warao, y refleja nuestra esencia: elevar ideas, sueños y capacidades.   </div>
     <div class="about-grid">
         <div class="about-card">
             <h4>Nuestra Misión</h4>
-            <p>Diseñar y ejecutar eventos de alto nivel que promuevan la formación profesional, el networking y el desarrollo turístico regional.</p>
+            <p>Formar y empoderar a los estudiantes a través de la planificación y ejecución de eventos temáticos que integren educación, motivación y comunidad, promoviendo el liderazgo, la inclusión y la experiencia práctica como herramienta de aprendizaje.</p>
         </div>
         <div class="about-card">
             <h4>Nuestra Visión</h4>
-            <p>Ser la agencia referente en experiencias memorables en la región andina, reconocida por nuestra innovación y elegancia.</p>
+            <p>Ser la plataforma universitaria referente en la creación de eventos formativos e innovadores, elevando el talento estudiantil y proyectando nuevas generaciones de profesionales preparados para transformar el turismo y la industria de eventos con propósito, inclusión y excelencia.</p>
         </div>
         <div class="about-card">
             <h4>Valores</h4>
-            <p>Hospitalidad, responsabilidad social y profesionalismo son los pilares que guían cada uno de nuestros proyectos.</p>
+            <p>Creemos en el aprendizaje práctico como motor de crecimiento, en el liderazgo diverso y el empoderamiento, en la inclusión como base de comunidad, en el trabajo en equipo como fuerza estratégica y en la excelencia como estándar en cada detalle.</p>
         </div>
     </div>
   </section>
@@ -735,14 +760,14 @@ header.scrolled {
         </div>
     </div>
     <div style="text-align: center; margin-top: 30px;">
-        <a href="https://wa.me/584164715431?text=Hola%20Akuai,%20estoy%20interesado%20en%20patrocinar%20sus%20eventos." target="_blank" style="color: var(--orange-2); font-weight: bold; border-bottom: 2px solid var(--orange); font-size: 14px;">¿Quieres ser patrocinante? Contáctanos aquí</a>
+        <a href="https://wa.me/584164715431?text=Hola%20Akuai,%20estoy%20interesado%20en%20patrocinar%20sus%20eventos." target="_blank" style="color: var(--orange-2); font-weight: bold; border-bottom: 2px solid var(--orange); font-size: 18px;">¿Te gustaría ser patrocinante? Contáctanos aquí</a>
     </div>
   </section>
 
   <section id="unete" class="cta-registry reveal">
     <h2 class="section-title">Únete</h2>
     <div id="cta-content" style="padding: 40px 0;">
-        <p style="color: var(--muted); max-width: 600px; margin: 0 auto 30px;">Regístrate para recibir invitaciones exclusivas a congresos, talleres y networking.</p>
+        <p style="color: var(--muted); max-width: 600px; margin: 0 auto 40px;">Déjanos tus datos para enviarte información sobre nuestros próximos eventos y novedades. Mantente conectado con Akuai y sé el primero en conocer nuestras nuevas experiencias.</p>
         <button onclick="mostrarFormulario()" class="btn-main" style="padding: 18px 40px;">Abrir Formulario de Registro</button>
     </div>
 
@@ -828,7 +853,7 @@ header.scrolled {
     <div class="contact-text">
       <h3 style="font-family:'Playfair Display'; font-size: 28px; color: var(--orange-2); margin-top:0;">¡Contáctanos!</h3>
       <p style="color: var(--muted); line-height: 1.8; margin-bottom: 25px;">
-        Estamos en Mérida, Venezuela, listos para planificar tu próximo gran momento. Haz clic en las apps del teléfono para escribirnos directamente.
+        Somos una iniciativa estudiantil ubicada en Mérida, Venezuela, dedicada a la creación de experiencias formativas a través de nuestros eventos. Haz clic en las aplicaciones del teléfono y escríbenos directamente. Será un gusto leerte.
       </p>
       <div style="margin-bottom: 10px;"><strong>Email:</strong> info@akuaieventos.com</div>
       <div><strong>Ubicación:</strong> Hotel Escuela, Av. Universidad.</div>
@@ -909,8 +934,12 @@ const galeriaData = {
                 nombre: "1era Edición",
                 concepto: "Lanzamiento oficial del movimiento de liderazgo femenino en el Hotel Escuela.",
                 participantes: [
-                    {nombre: "Gisela Silva", foto: "mujer1.png"},
-                    {nombre: "Tachy Molina", foto: "t.jpg"}
+                    {nombre: "Gisela Silva", foto: "mujer1.png"}, {nombre: "Tachy Molina", foto: "t.jpg"},
+                    {nombre: "Ponente 3", foto: "p3.jpg"}, {nombre: "Ponente 4", foto: "p4.jpg"},
+                    {nombre: "Ponente 5", foto: "p5.jpg"}, {nombre: "Ponente 6", foto: "p6.jpg"},
+                    {nombre: "Ponente 7", foto: "p7.jpg"}, {nombre: "Ponente 8", foto: "p8.jpg"},
+                    {nombre: "Ponente 9", foto: "p9.jpg"}, {nombre: "Ponente 10", foto: "p10.jpg"},
+                    {nombre: "Ponente 11", foto: "p11.jpg"}, {nombre: "Ponente 12", foto: "p12.jpg"}
                 ],
                 fotos: ["g.png", "g1.png", "g2.png"]
             },
@@ -918,8 +947,12 @@ const galeriaData = {
                 nombre: "2da Edición",
                 concepto: "Enfoque en la sostenibilidad y el rol de las posadas andinas.",
                 participantes: [
-                    {nombre: "Nadia Gonzales", foto: "n.jpg"},
-                    {nombre: "Elizabeth Di Dio", foto: "e.jpg"}
+                    {nombre: "Nadia Gonzales", foto: "n.jpg"}, {nombre: "Elizabeth Di Dio", foto: "e.jpg"},
+                    {nombre: "Ponente 3", foto: "p3.jpg"}, {nombre: "Ponente 4", foto: "p4.jpg"},
+                    {nombre: "Ponente 5", foto: "p5.jpg"}, {nombre: "Ponente 6", foto: "p6.jpg"},
+                    {nombre: "Ponente 7", foto: "p7.jpg"}, {nombre: "Ponente 8", foto: "p8.jpg"},
+                    {nombre: "Ponente 9", foto: "p9.jpg"}, {nombre: "Ponente 10", foto: "p10.jpg"},
+                    {nombre: "Ponente 11", foto: "p11.jpg"}, {nombre: "Ponente 12", foto: "p12.jpg"}
                 ],
                 fotos: ["m3.jpg", "m4.jpg"]
             },
@@ -927,8 +960,12 @@ const galeriaData = {
                 nombre: "3era Edición",
                 concepto: "Celebración y networking de alto nivel en la ciudad de Mérida.",
                 participantes: [
-                    {nombre: "Dora Ríos", foto: "d.jpg"},
-                    {nombre: "Vicky Herrera", foto: "v.jpg"}
+                    {nombre: "Dora Ríos", foto: "d.jpg"}, {nombre: "Vicky Herrera", foto: "v.jpg"},
+                    {nombre: "Ponente 3", foto: "p3.jpg"}, {nombre: "Ponente 4", foto: "p4.jpg"},
+                    {nombre: "Ponente 5", foto: "p5.jpg"}, {nombre: "Ponente 6", foto: "p6.jpg"},
+                    {nombre: "Ponente 7", foto: "p7.jpg"}, {nombre: "Ponente 8", foto: "p8.jpg"},
+                    {nombre: "Ponente 9", foto: "p9.jpg"}, {nombre: "Ponente 10", foto: "p10.jpg"},
+                    {nombre: "Ponente 11", foto: "p11.jpg"}, {nombre: "Ponente 12", foto: "p12.jpg"}
                 ],
                 fotos: ["m5.jpg", "m6.jpg"]
             }
@@ -940,20 +977,15 @@ const galeriaData = {
             {
                 nombre: "Edición 2024",
                 concepto: "Gran encuentro gastronómico en el centro de Mérida.",
-                participantes: [{nombre: "Chef Local", foto: "c.jpg"}],
+                participantes: [
+                    {nombre: "Chef Principal", foto: "c1.jpg"}, {nombre: "Ayudante", foto: "c2.jpg"},
+                    {nombre: "Ponente 3", foto: "p3.jpg"}, {nombre: "Ponente 4", foto: "p4.jpg"},
+                    {nombre: "Ponente 5", foto: "p5.jpg"}, {nombre: "Ponente 6", foto: "p6.jpg"},
+                    {nombre: "Ponente 7", foto: "p7.jpg"}, {nombre: "Ponente 8", foto: "p8.jpg"},
+                    {nombre: "Ponente 9", foto: "p9.jpg"}, {nombre: "Ponente 10", foto: "p10.jpg"},
+                    {nombre: "Ponente 11", foto: "p11.jpg"}, {nombre: "Ponente 12", foto: "p12.jpg"}
+                ],
                 fotos: ["a1.jpg"]
-            },
-            {
-                nombre: "Edición 2023",
-                concepto: "Rescate de las tradiciones culinarias andinas.",
-                participantes: [{nombre: "Maestro Arepero", foto: "c2.jpg"}],
-                fotos: ["a2.jpg"]
-            },
-            {
-                nombre: "Edición 2022",
-                concepto: "Primer encuentro masivo para celebrar nuestra cultura.",
-                participantes: [{nombre: "Cultura Mérida", foto: "c3.jpg"}],
-                fotos: ["a3.jpg"]
             }
         ]
     },
@@ -963,20 +995,15 @@ const galeriaData = {
             {
                 nombre: "Edición I",
                 concepto: "Formación intensiva para gerentes del sector turismo.",
-                participantes: [{nombre: "Coach 1", foto: "p1.jpg"}],
+                participantes: [
+                    {nombre: "Coach 1", foto: "p1.jpg"}, {nombre: "Invitado", foto: "p2.jpg"},
+                    {nombre: "Ponente 3", foto: "p3.jpg"}, {nombre: "Ponente 4", foto: "p4.jpg"},
+                    {nombre: "Ponente 5", foto: "p5.jpg"}, {nombre: "Ponente 6", foto: "p6.jpg"},
+                    {nombre: "Ponente 7", foto: "p7.jpg"}, {nombre: "Ponente 8", foto: "p8.jpg"},
+                    {nombre: "Ponente 9", foto: "p9.jpg"}, {nombre: "Ponente 10", foto: "p10.jpg"},
+                    {nombre: "Ponente 11", foto: "p11.jpg"}, {nombre: "Ponente 12", foto: "p12.jpg"}
+                ],
                 fotos: ["l1.jpg"]
-            },
-            {
-                nombre: "Edición II",
-                concepto: "Estrategias de marketing aplicadas a la hotelería moderna.",
-                participantes: [{nombre: "Experto Marketing", foto: "p2.jpg"}],
-                fotos: ["l2.jpg"]
-            },
-            {
-                nombre: "Edición III",
-                concepto: "Liderazgo resiliente y gestión de equipos de alto desempeño.",
-                participantes: [{nombre: "Facilitador Senior", foto: "p3.jpg"}],
-                fotos: ["l3.jpg"]
             }
         ]
     }
@@ -1013,37 +1040,34 @@ function cambiarEdicion(index, btn = null) {
     const content = document.getElementById('detail-content');
     
     content.innerHTML = `
-        <div class="detail-layout">
+        <div class="detail-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+            
             <div>
-                <h2 style="font-family:'Playfair Display'; color:var(--orange-2); margin:0 0 10px 0;">${categoriaActiva.nombreEvento}</h2>
-                <span class="badge" style="margin-bottom:20px; display:inline-block;">${ed.nombre}</span>
-                <p style="line-height:1.7; color:var(--muted); margin-bottom:30px; font-size:15px;">${ed.concepto}</p>
+                <h2 style="font-family:'Playfair Display'; color:#E07A1F; margin-bottom:10px;">${categoriaActiva.nombreEvento}</h2>
+                <span class="badge" style="background:#fdf0e6; color:#E07A1F; padding:5px 15px; border-radius:20px; font-size:12px; font-weight:bold;">${ed.nombre}</span>
+                <p style="margin: 20px 0; color:#666; font-size:14px; line-height:1.6;">${ed.concept || ed.concepto}</p>
                 
-                <h4 style="font-size:14px; text-transform:uppercase; color:var(--ink); border-bottom:1px solid #eee; padding-bottom:10px;">Ponentes y Participantes</h4>
-                <div class="speaker-strip">
+                <h4 style="font-size:13px; text-transform:uppercase; border-bottom:1px solid #eee; padding-bottom:10px; margin-bottom:15px;">Ponentes y Participantes</h4>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
                     ${ed.participantes.map(p => `
-                        <div class="speaker-mini">
-                            <img src="${p.foto}" alt="${p.nombre}" onerror="this.src='https://via.placeholder.com/85'">
-                            <p><strong>${p.nombre}</strong></p>
+                        <div style="text-align:center;">
+                            <img src="${p.foto}" style="width:60px; height:60px; border-radius:50%; object-fit:cover; border:2px solid #E07A1F;" onerror="this.src='https://via.placeholder.com/60'">
+                            <p style="margin:5px 0 0; font-size:9px; font-weight:700; color:#333;">${p.nombre}</p>
                         </div>
                     `).join('')}
                 </div>
             </div>
-            
-            <div style="position: relative; min-width: 0;">
-                <h4 style="font-size:14px; text-transform:uppercase; color:var(--ink); margin-bottom:20px;">Galería de Imágenes</h4>
-                
-                <div class="gallery-container-wrapper" style="position: relative; display: flex; align-items: center;">
-                    
-                    <button class="nav-arrow left" onclick="document.getElementById('carrusel-fotos').scrollBy({left: -400, behavior: 'smooth'})">❮</button>
-                    
-                    <div id="carrusel-fotos" class="photo-carousel">
-                        ${ed.fotos.map(f => `<img src="${f}" alt="Edición" onerror="this.src='https://via.placeholder.com/260x450'">`).join('')}
-                    </div>
 
-                    <button class="nav-arrow right" onclick="document.getElementById('carrusel-fotos').scrollBy({left: 400, behavior: 'smooth'})">❯</button>
+            <div class="gallery-container-fixed">
+                <button class="nav-arrow left" onclick="document.getElementById('carrusel-fotos').scrollBy({left: -document.getElementById('carrusel-fotos').offsetWidth, behavior: 'smooth'})">❮</button>
                 
+                <div id="carrusel-fotos">
+                    ${ed.fotos.map(f => `
+                        <img src="${f}" onerror="this.src='https://via.placeholder.com/500x500'">
+                    `).join('')}
                 </div>
+
+                <button class="nav-arrow right" onclick="document.getElementById('carrusel-fotos').scrollBy({left: document.getElementById('carrusel-fotos').offsetWidth, behavior: 'smooth'})">❯</button>
             </div>
         </div>
     `;
