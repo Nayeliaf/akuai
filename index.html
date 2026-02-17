@@ -267,52 +267,6 @@ h1 { font-family: 'Playfair Display', serif; font-size: 44px; margin: 0 0 15px 0
 footer { text-align: center; padding: 40px 0; background: #fff; color: var(--muted); font-size: 14px; }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@media (max-width: 920px) {
-    /* Ajustes de Header y Navegación */
-    .topbar { flex-direction: column; gap: 15px; padding: 15px 0; }
-    nav { 
-        overflow-x: auto; 
-        width: 100%; 
-        justify-content: flex-start; 
-        padding-bottom: 8px;
-        -webkit-overflow-scrolling: touch; /* Scroll suave en iPhone */
-    }
-    nav a { font-size: 12px; padding: 6px 10px; }
-
-    /* Ajustes de Textos y Hero */
-    .hero-grid { grid-template-columns: 1fr; gap: 20px; }
-    h1 { font-size: 32px; text-align: center; }
-    .lead { font-size: 16px; text-align: center; }
-    .hero-card { padding: 25px; text-align: center; }
-    .stat-card { padding: 30px; text-align: center; }
-
-    /* Ajustes de Secciones */
-    section { padding: 50px 0; }
-    h2.section-title { font-size: 28px; }
-
-    /* Galería y Detalles */
-    .gallery-item { height: 300px; }
-    .detail-layout { grid-template-columns: 1fr; gap: 30px; }
-    .photo-carousel img { height: 200px; }
-
-    /* Formulario: Muy importante para que no se salga de la pantalla */
-    .form-container { 
-        padding: 25px 15px; 
-        margin: 10px;
-        border-radius: 15px;
-    }
-    .grid-options { grid-template-columns: 1fr; } /* Opciones una debajo de otra */
-
-    /* Footer */
-    .footer-banner { height: 200px; }
-}
-
-/* Ajuste extra para teléfonos muy pequeños (iPhone SE, etc) */
-@media (max-width: 400px) {
-    h1 { font-size: 26px; }
-    .calendar-header { font-size: 9px; }
-    .day { font-size: 11px; }
-}
 /* --- EFECTO DE APARICIÓN AL BAJAR --- */
 .reveal {
   opacity: 0;
@@ -464,129 +418,162 @@ header.scrolled {
 }
 /* --- AJUSTE DE DISEÑO PARA GALERÍA HORIZONTAL --- */
 
-#ev-gallery-photos {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important; /* Permite deslizar a los lados */
-    overflow-y: hidden !important;
-    gap: 12px !important;
-    padding: 10px 0 20px 0 !important;
-    width: 100% !important;
-    /* Suavizado para móviles */
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-}
-/* --- AJUSTE DE DISEÑO PROFESIONAL --- */
+@media (max-width: 920px) {
+    /* 1. Forzamos que el detalle de la galería sea una sola columna */
+    .detail-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: 1fr !important; 
+        padding: 10px !important;
+        gap: 20px !important;
+    }
 
-/* 1. Limitamos el contenedor para que no se salga de la caja blanca */
-.detail-layout {
-    display: grid !important;
-    grid-template-columns: 350px 1fr !important; /* Columna izquierda fija, derecha flexible */
-    gap: 30px !important;
-    align-items: start !important;
-    overflow: hidden !important; /* Evita que el carrusel rompa el borde del modal */
-    padding: 20px;
-}
+    /* 2. Ajustamos el contenedor de fotos para que no rompa el ancho */
+    .gallery-container-fixed {
+        max-width: 100% !important;
+        overflow: hidden;
+    }
 
-/* 2. El carrusel ahora tendrá una altura más elegante */
-#ev-gallery-photos {
-    display: flex !important;
-    gap: 15px !important;
-    overflow-x: auto !important;
-    padding-bottom: 15px !important;
-    /* Creamos un margen interno a la derecha para que la última foto no pegue al borde */
-    padding-right: 50px !important; 
-}
+    #carrusel-fotos img {
+        height: 300px !important; /* Altura más cómoda para celular */
+        border-radius: 15px !important;
+    }
 
-/* 3. Ajustamos las fotos para que no sean tan imponentes */
-#ev-gallery-photos img {
-    height: 380px !important; /* Tamaño ideal según tu captura */
-    width: auto !important;
-    border-radius: 25px !important; /* Bordes más redondeados como en tu imagen */
-    flex-shrink: 0 !important;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
-    transition: transform 0.3s ease;
-}
+    /* 3. Ajustamos las flechas para que no se salgan del borde del teléfono */
+    .nav-arrow.left { left: 5px !important; }
+    .nav-arrow.right { right: 5px !important; }
 
-/* Contenedor de las 12 ponentes */
-.speaker-grid-layout {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 ponentes por fila en PC */
-    gap: 15px;
-    margin-top: 20px;
+    /* 4. Lista de ponentes en el modal y galería */
+    #speakers-list {
+        grid-template-columns: 1fr !important; /* Una sola fila */
+        gap: 10px !important;
+    }
+
+    /* 5. Aseguramos que el contenedor de la galería detallada sea visible */
+    #gallery-detail {
+        padding: 20px 15px !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+
+    /* 6. El selector de ediciones (pestañas) */
+    .edition-selector {
+        justify-content: center;
+        gap: 5px;
+    }
+    
+    .btn-edition {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
 }
 
-.speaker-mini {
-    text-align: center;
-    background: #fff;
-    padding: 10px;
-    border-radius: 12px;
-    transition: 0.3s;
-}
+/* =========================================
+   REPARACIÓN ESTÉTICA DE FLECHAS (MODO CARRUSEL)
+   ========================================= */
 
-.speaker-mini:hover {
-    transform: translateY(-5px);
-}
-
-.speaker-mini img {
-    width: 80px !important;
-    height: 80px !important;
-    border-radius: 50% !important;
-    object-fit: cover !important;
-    border: 2px solid var(--orange);
-    margin-bottom: 8px;
-}
-/* Contenedor relativo para que las flechas se peguen a la foto */
-.gallery-container-fixed {
-    position: relative;
-    width: 100%;
-    max-width: 500px; /* Tamaño de la foto centrada */
-    margin: 0 auto;
-}
-
-#carrusel-fotos {
-    display: flex !important;
-    overflow-x: hidden !important; /* Escondemos barra para que sea elegante */
-    scroll-behavior: smooth;
-    gap: 0 !important;
-    border-radius: 25px;
-}
-
-#carrusel-fotos img {
-    width: 100% !important;
-    flex: 0 0 100% !important;
-    height: 600px !important;
-    object-fit: cover !important;
-}
-
-/* La interfaz de la flecha como la tenías antes */
+/* Mantenemos tu diseño original */
 .nav-arrow {
     position: absolute !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
     width: 45px !important;
     height: 45px !important;
-    background: #E07A1F !important; /* Tu naranja */
+    background: #E07A1F !important; /* Tu naranja Akuai */
     color: white !important;
     border: none !important;
     border-radius: 50% !important;
     cursor: pointer !important;
-    z-index: 10 !important;
+    z-index: 100 !important; /* Siempre por encima */
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important;
     font-size: 18px !important;
+    transition: all 0.3s ease !important;
 }
 
-/* Posición exacta sobre los bordes de la imagen */
-.nav-arrow.left { left: -22px !important; }
-.nav-arrow.right { right: -22px !important; }
+/* Ajuste de posición para que NO se corten en el teléfono */
+@media (max-width: 920px) {
+    /* Las pegamos justo al borde interno para que se vean completas */
+    .nav-arrow.left { 
+        left: 0px !important; 
+        border-radius: 0 50% 50% 0 !important; /* Opcional: media luna para pegar al borde */
+    }
+    .nav-arrow.right { 
+        right: 0px !important; 
+        border-radius: 50% 0 0 50% !important; /* Opcional: media luna para pegar al borde */
+    }
 
+    /* Si prefieres que sigan siendo círculos completos, usa este: */
+    /* .nav-arrow.left { left: 5px !important; } */
+    /* .nav-arrow.right { right: 5px !important; } */
+
+    /* Forzamos el carrusel horizontal una vez más por si acaso */
+    #carrusel-fotos {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 0 !important;
+    }
+    
+    #carrusel-fotos img {
+        min-width: 100% !important;
+        width: 100% !important;
+        flex: 0 0 100% !important;
+        scroll-snap-align: center !important;
+        object-fit: cover !important;
+    }
+}
+
+/* Efecto hover original */
 .nav-arrow:hover {
     background: #c36616 !important;
     transform: translateY(-50%) scale(1.1) !important;
+}
+/* =========================================
+   FIX: POSICIONAMIENTO DE FLECHAS EN GALERÍA
+   ========================================= */
+
+/* 1. Contenedor relativo para que las flechas se anclen AQUÍ */
+.gallery-container-fixed {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 500px;
+    margin: 20px auto !important; /* Espaciado para que no choque con los ponentes */
+    overflow: visible !important; /* Permitimos que las flechas sobresalgan un poco */
+}
+
+/* 2. El carrusel debe estar limpio de interferencias */
+#carrusel-fotos {
+    display: flex !important;
+    overflow: hidden !important;
+    border-radius: 25px;
+    scroll-snap-type: x mandatory;
+}
+
+/* 3. Las flechas: Ajuste de Z-INDEX y posición */
+.nav-arrow {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 999 !important; /* Por encima de todo */
+}
+
+/* En PC las dejamos que sobresalgan como te gusta */
+.nav-arrow.left { left: -22px !important; }
+.nav-arrow.right { right: -22px !important; }
+
+/* 4. AJUSTE PARA MÓVIL (Captura de pantalla) */
+@media (max-width: 920px) {
+    .nav-arrow.left { left: 5px !important; } /* Las metemos un pelo para que no se salgan del borde del celular */
+    .nav-arrow.right { right: 5px !important; }
+    
+    .nav-arrow {
+        width: 40px !important;
+        height: 40px !important;
+    }
 }
 </style>
 </head>
